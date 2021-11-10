@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAMES HERE"
+title: "Cervical Cancer"
+author: "Jiawen Zhou, Lea Benyamin and Yuxin Cui"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
