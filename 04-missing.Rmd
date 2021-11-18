@@ -1,7 +1,5 @@
----
-title: "missing-values"
-output: html_document
----
+# Missing values
+
 
 ```{r setup, include=FALSE}
 # this prevents package loading message from appearing in the rendered version of your problem set

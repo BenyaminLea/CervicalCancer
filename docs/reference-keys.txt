@@ -2,6 +2,10 @@ introduction
 data-sources
 data-transformation
 missing-values
+dataset
+missing-values-by-column
+missing-value-plots
+using-problem-2-missing-value-function
 results
 interactive-component
 conclusion
