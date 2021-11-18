@@ -231,260 +231,136 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">4.3</span> Missing Value Plots</h2>
 <p>Here is a missing value plots with heat map of the first 100 data rows.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="missing-values.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mi)</span>
-<span id="cb5-2"><a href="missing-values.html#cb5-2" aria-hidden="true" tabindex="-1"></a>datasetdf <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(ex)</span>
-<span id="cb5-3"><a href="missing-values.html#cb5-3" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">missing_data.frame</span>(datasetdf)</span></code></pre></div>
+<span id="cb5-2"><a href="missing-values.html#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(ex) <span class="ot">=</span> <span class="fu">abbreviate</span>(<span class="fu">names</span>(ex), <span class="at">minlength =</span> <span class="dv">2</span>)</span>
+<span id="cb5-3"><a href="missing-values.html#cb5-3" aria-hidden="true" tabindex="-1"></a>datasetdf <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(ex)</span>
+<span id="cb5-4"><a href="missing-values.html#cb5-4" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">missing_data.frame</span>(datasetdf)</span></code></pre></div>
 <pre><code>## NOTE: The following pairs of variables appear to have the same missingness pattern.
 ##  Please verify whether they are in fact logically distinct variables.
-##        [,1]                                
-##   [1,] &quot;Smokes&quot;                            
-##   [2,] &quot;Smokes&quot;                            
-##   [3,] &quot;Smokes (years)&quot;                    
-##   [4,] &quot;Hormonal Contraceptives&quot;           
-##   [5,] &quot;Hormonal Contraceptives&quot;           
-##   [6,] &quot;Hormonal Contraceptives&quot;           
-##   [7,] &quot;Hormonal Contraceptives&quot;           
-##   [8,] &quot;Hormonal Contraceptives&quot;           
-##   [9,] &quot;Hormonal Contraceptives&quot;           
-##  [10,] &quot;Hormonal Contraceptives&quot;           
-##  [11,] &quot;Hormonal Contraceptives&quot;           
-##  [12,] &quot;Hormonal Contraceptives&quot;           
-##  [13,] &quot;Hormonal Contraceptives&quot;           
-##  [14,] &quot;Hormonal Contraceptives&quot;           
-##  [15,] &quot;Hormonal Contraceptives&quot;           
-##  [16,] &quot;Hormonal Contraceptives&quot;           
-##  [17,] &quot;Hormonal Contraceptives&quot;           
-##  [18,] &quot;Hormonal Contraceptives&quot;           
-##  [19,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [20,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [21,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [22,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [23,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [24,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [25,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [26,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [27,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [28,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [29,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [30,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [31,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [32,] &quot;Hormonal Contraceptives (years)&quot;   
-##  [33,] &quot;IUD&quot;                               
-##  [34,] &quot;STDs&quot;                              
-##  [35,] &quot;STDs&quot;                              
-##  [36,] &quot;STDs&quot;                              
-##  [37,] &quot;STDs&quot;                              
-##  [38,] &quot;STDs&quot;                              
-##  [39,] &quot;STDs&quot;                              
-##  [40,] &quot;STDs&quot;                              
-##  [41,] &quot;STDs&quot;                              
-##  [42,] &quot;STDs&quot;                              
-##  [43,] &quot;STDs&quot;                              
-##  [44,] &quot;STDs&quot;                              
-##  [45,] &quot;STDs&quot;                              
-##  [46,] &quot;STDs&quot;                              
-##  [47,] &quot;STDs (number)&quot;                     
-##  [48,] &quot;STDs (number)&quot;                     
-##  [49,] &quot;STDs (number)&quot;                     
-##  [50,] &quot;STDs (number)&quot;                     
-##  [51,] &quot;STDs (number)&quot;                     
-##  [52,] &quot;STDs (number)&quot;                     
-##  [53,] &quot;STDs (number)&quot;                     
-##  [54,] &quot;STDs (number)&quot;                     
-##  [55,] &quot;STDs (number)&quot;                     
-##  [56,] &quot;STDs (number)&quot;                     
-##  [57,] &quot;STDs (number)&quot;                     
-##  [58,] &quot;STDs (number)&quot;                     
-##  [59,] &quot;STDs:condylomatosis&quot;               
-##  [60,] &quot;STDs:condylomatosis&quot;               
-##  [61,] &quot;STDs:condylomatosis&quot;               
-##  [62,] &quot;STDs:condylomatosis&quot;               
-##  [63,] &quot;STDs:condylomatosis&quot;               
-##  [64,] &quot;STDs:condylomatosis&quot;               
-##  [65,] &quot;STDs:condylomatosis&quot;               
-##  [66,] &quot;STDs:condylomatosis&quot;               
-##  [67,] &quot;STDs:condylomatosis&quot;               
-##  [68,] &quot;STDs:condylomatosis&quot;               
-##  [69,] &quot;STDs:condylomatosis&quot;               
-##  [70,] &quot;STDs:cervical condylomatosis&quot;      
-##  [71,] &quot;STDs:cervical condylomatosis&quot;      
-##  [72,] &quot;STDs:cervical condylomatosis&quot;      
-##  [73,] &quot;STDs:cervical condylomatosis&quot;      
-##  [74,] &quot;STDs:cervical condylomatosis&quot;      
-##  [75,] &quot;STDs:cervical condylomatosis&quot;      
-##  [76,] &quot;STDs:cervical condylomatosis&quot;      
-##  [77,] &quot;STDs:cervical condylomatosis&quot;      
-##  [78,] &quot;STDs:cervical condylomatosis&quot;      
-##  [79,] &quot;STDs:cervical condylomatosis&quot;      
-##  [80,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [81,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [82,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [83,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [84,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [85,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [86,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [87,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [88,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [89,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [90,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [91,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [92,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [93,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [94,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [95,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [96,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [97,] &quot;STDs:syphilis&quot;                     
-##  [98,] &quot;STDs:syphilis&quot;                     
-##  [99,] &quot;STDs:syphilis&quot;                     
-## [100,] &quot;STDs:syphilis&quot;                     
-## [101,] &quot;STDs:syphilis&quot;                     
-## [102,] &quot;STDs:syphilis&quot;                     
-## [103,] &quot;STDs:syphilis&quot;                     
-## [104,] &quot;STDs:pelvic inflammatory disease&quot;  
-## [105,] &quot;STDs:pelvic inflammatory disease&quot;  
-## [106,] &quot;STDs:pelvic inflammatory disease&quot;  
-## [107,] &quot;STDs:pelvic inflammatory disease&quot;  
-## [108,] &quot;STDs:pelvic inflammatory disease&quot;  
-## [109,] &quot;STDs:pelvic inflammatory disease&quot;  
-## [110,] &quot;STDs:genital herpes&quot;               
-## [111,] &quot;STDs:genital herpes&quot;               
-## [112,] &quot;STDs:genital herpes&quot;               
-## [113,] &quot;STDs:genital herpes&quot;               
-## [114,] &quot;STDs:genital herpes&quot;               
-## [115,] &quot;STDs:molluscum contagiosum&quot;        
-## [116,] &quot;STDs:molluscum contagiosum&quot;        
-## [117,] &quot;STDs:molluscum contagiosum&quot;        
-## [118,] &quot;STDs:molluscum contagiosum&quot;        
-## [119,] &quot;STDs:AIDS&quot;                         
-## [120,] &quot;STDs:AIDS&quot;                         
-## [121,] &quot;STDs:AIDS&quot;                         
-## [122,] &quot;STDs:HIV&quot;                          
-## [123,] &quot;STDs:HIV&quot;                          
-## [124,] &quot;STDs:Hepatitis B&quot;                  
-##        [,2]                                
-##   [1,] &quot;Smokes (years)&quot;                    
-##   [2,] &quot;Smokes (packs/year)&quot;               
-##   [3,] &quot;Smokes (packs/year)&quot;               
-##   [4,] &quot;Hormonal Contraceptives (years)&quot;   
-##   [5,] &quot;STDs&quot;                              
-##   [6,] &quot;STDs (number)&quot;                     
-##   [7,] &quot;STDs:condylomatosis&quot;               
-##   [8,] &quot;STDs:cervical condylomatosis&quot;      
-##   [9,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [10,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [11,] &quot;STDs:syphilis&quot;                     
-##  [12,] &quot;STDs:pelvic inflammatory disease&quot;  
-##  [13,] &quot;STDs:genital herpes&quot;               
-##  [14,] &quot;STDs:molluscum contagiosum&quot;        
-##  [15,] &quot;STDs:AIDS&quot;                         
-##  [16,] &quot;STDs:HIV&quot;                          
-##  [17,] &quot;STDs:Hepatitis B&quot;                  
-##  [18,] &quot;STDs:HPV&quot;                          
-##  [19,] &quot;STDs&quot;                              
-##  [20,] &quot;STDs (number)&quot;                     
-##  [21,] &quot;STDs:condylomatosis&quot;               
-##  [22,] &quot;STDs:cervical condylomatosis&quot;      
-##  [23,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [24,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [25,] &quot;STDs:syphilis&quot;                     
-##  [26,] &quot;STDs:pelvic inflammatory disease&quot;  
-##  [27,] &quot;STDs:genital herpes&quot;               
-##  [28,] &quot;STDs:molluscum contagiosum&quot;        
-##  [29,] &quot;STDs:AIDS&quot;                         
-##  [30,] &quot;STDs:HIV&quot;                          
-##  [31,] &quot;STDs:Hepatitis B&quot;                  
-##  [32,] &quot;STDs:HPV&quot;                          
-##  [33,] &quot;IUD (years)&quot;                       
-##  [34,] &quot;STDs (number)&quot;                     
-##  [35,] &quot;STDs:condylomatosis&quot;               
-##  [36,] &quot;STDs:cervical condylomatosis&quot;      
-##  [37,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [38,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [39,] &quot;STDs:syphilis&quot;                     
-##  [40,] &quot;STDs:pelvic inflammatory disease&quot;  
-##  [41,] &quot;STDs:genital herpes&quot;               
-##  [42,] &quot;STDs:molluscum contagiosum&quot;        
-##  [43,] &quot;STDs:AIDS&quot;                         
-##  [44,] &quot;STDs:HIV&quot;                          
-##  [45,] &quot;STDs:Hepatitis B&quot;                  
-##  [46,] &quot;STDs:HPV&quot;                          
-##  [47,] &quot;STDs:condylomatosis&quot;               
-##  [48,] &quot;STDs:cervical condylomatosis&quot;      
-##  [49,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [50,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [51,] &quot;STDs:syphilis&quot;                     
-##  [52,] &quot;STDs:pelvic inflammatory disease&quot;  
-##  [53,] &quot;STDs:genital herpes&quot;               
-##  [54,] &quot;STDs:molluscum contagiosum&quot;        
-##  [55,] &quot;STDs:AIDS&quot;                         
-##  [56,] &quot;STDs:HIV&quot;                          
-##  [57,] &quot;STDs:Hepatitis B&quot;                  
-##  [58,] &quot;STDs:HPV&quot;                          
-##  [59,] &quot;STDs:cervical condylomatosis&quot;      
-##  [60,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [61,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [62,] &quot;STDs:syphilis&quot;                     
-##  [63,] &quot;STDs:pelvic inflammatory disease&quot;  
-##  [64,] &quot;STDs:genital herpes&quot;               
-##  [65,] &quot;STDs:molluscum contagiosum&quot;        
-##  [66,] &quot;STDs:AIDS&quot;                         
-##  [67,] &quot;STDs:HIV&quot;                          
-##  [68,] &quot;STDs:Hepatitis B&quot;                  
-##  [69,] &quot;STDs:HPV&quot;                          
-##  [70,] &quot;STDs:vaginal condylomatosis&quot;       
-##  [71,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [72,] &quot;STDs:syphilis&quot;                     
-##  [73,] &quot;STDs:pelvic inflammatory disease&quot;  
-##  [74,] &quot;STDs:genital herpes&quot;               
-##  [75,] &quot;STDs:molluscum contagiosum&quot;        
-##  [76,] &quot;STDs:AIDS&quot;                         
-##  [77,] &quot;STDs:HIV&quot;                          
-##  [78,] &quot;STDs:Hepatitis B&quot;                  
-##  [79,] &quot;STDs:HPV&quot;                          
-##  [80,] &quot;STDs:vulvo-perineal condylomatosis&quot;
-##  [81,] &quot;STDs:syphilis&quot;                     
-##  [82,] &quot;STDs:pelvic inflammatory disease&quot;  
-##  [83,] &quot;STDs:genital herpes&quot;               
-##  [84,] &quot;STDs:molluscum contagiosum&quot;        
-##  [85,] &quot;STDs:AIDS&quot;                         
-##  [86,] &quot;STDs:HIV&quot;                          
-##  [87,] &quot;STDs:Hepatitis B&quot;                  
-##  [88,] &quot;STDs:HPV&quot;                          
-##  [89,] &quot;STDs:syphilis&quot;                     
-##  [90,] &quot;STDs:pelvic inflammatory disease&quot;  
-##  [91,] &quot;STDs:genital herpes&quot;               
-##  [92,] &quot;STDs:molluscum contagiosum&quot;        
-##  [93,] &quot;STDs:AIDS&quot;                         
-##  [94,] &quot;STDs:HIV&quot;                          
-##  [95,] &quot;STDs:Hepatitis B&quot;                  
-##  [96,] &quot;STDs:HPV&quot;                          
-##  [97,] &quot;STDs:pelvic inflammatory disease&quot;  
-##  [98,] &quot;STDs:genital herpes&quot;               
-##  [99,] &quot;STDs:molluscum contagiosum&quot;        
-## [100,] &quot;STDs:AIDS&quot;                         
-## [101,] &quot;STDs:HIV&quot;                          
-## [102,] &quot;STDs:Hepatitis B&quot;                  
-## [103,] &quot;STDs:HPV&quot;                          
-## [104,] &quot;STDs:genital herpes&quot;               
-## [105,] &quot;STDs:molluscum contagiosum&quot;        
-## [106,] &quot;STDs:AIDS&quot;                         
-## [107,] &quot;STDs:HIV&quot;                          
-## [108,] &quot;STDs:Hepatitis B&quot;                  
-## [109,] &quot;STDs:HPV&quot;                          
-## [110,] &quot;STDs:molluscum contagiosum&quot;        
-## [111,] &quot;STDs:AIDS&quot;                         
-## [112,] &quot;STDs:HIV&quot;                          
-## [113,] &quot;STDs:Hepatitis B&quot;                  
-## [114,] &quot;STDs:HPV&quot;                          
-## [115,] &quot;STDs:AIDS&quot;                         
-## [116,] &quot;STDs:HIV&quot;                          
-## [117,] &quot;STDs:Hepatitis B&quot;                  
-## [118,] &quot;STDs:HPV&quot;                          
-## [119,] &quot;STDs:HIV&quot;                          
-## [120,] &quot;STDs:Hepatitis B&quot;                  
-## [121,] &quot;STDs:HPV&quot;                          
-## [122,] &quot;STDs:Hepatitis B&quot;                  
-## [123,] &quot;STDs:HPV&quot;                          
-## [124,] &quot;STDs:HPV&quot;</code></pre>
+##        [,1]      [,2]     
+##   [1,] &quot;Sm&quot;      &quot;S()&quot;    
+##   [2,] &quot;Sm&quot;      &quot;S(/&quot;    
+##   [3,] &quot;S()&quot;     &quot;S(/&quot;    
+##   [4,] &quot;HC&quot;      &quot;HC(&quot;    
+##   [5,] &quot;HC&quot;      &quot;STDs&quot;   
+##   [6,] &quot;HC&quot;      &quot;ST(&quot;    
+##   [7,] &quot;HC&quot;      &quot;STDs:cn&quot;
+##   [8,] &quot;HC&quot;      &quot;STDs:cc&quot;
+##   [9,] &quot;HC&quot;      &quot;STDs:vc&quot;
+##  [10,] &quot;HC&quot;      &quot;STD:-c&quot; 
+##  [11,] &quot;HC&quot;      &quot;STDs:s&quot; 
+##  [12,] &quot;HC&quot;      &quot;Sid&quot;    
+##  [13,] &quot;HC&quot;      &quot;Sh&quot;     
+##  [14,] &quot;HC&quot;      &quot;STDs:mc&quot;
+##  [15,] &quot;HC&quot;      &quot;STD:A&quot;  
+##  [16,] &quot;HC&quot;      &quot;STD:HI&quot; 
+##  [17,] &quot;HC&quot;      &quot;SB&quot;     
+##  [18,] &quot;HC&quot;      &quot;STD:HP&quot; 
+##  [19,] &quot;HC(&quot;     &quot;STDs&quot;   
+##  [20,] &quot;HC(&quot;     &quot;ST(&quot;    
+##  [21,] &quot;HC(&quot;     &quot;STDs:cn&quot;
+##  [22,] &quot;HC(&quot;     &quot;STDs:cc&quot;
+##  [23,] &quot;HC(&quot;     &quot;STDs:vc&quot;
+##  [24,] &quot;HC(&quot;     &quot;STD:-c&quot; 
+##  [25,] &quot;HC(&quot;     &quot;STDs:s&quot; 
+##  [26,] &quot;HC(&quot;     &quot;Sid&quot;    
+##  [27,] &quot;HC(&quot;     &quot;Sh&quot;     
+##  [28,] &quot;HC(&quot;     &quot;STDs:mc&quot;
+##  [29,] &quot;HC(&quot;     &quot;STD:A&quot;  
+##  [30,] &quot;HC(&quot;     &quot;STD:HI&quot; 
+##  [31,] &quot;HC(&quot;     &quot;SB&quot;     
+##  [32,] &quot;HC(&quot;     &quot;STD:HP&quot; 
+##  [33,] &quot;IU&quot;      &quot;I(&quot;     
+##  [34,] &quot;STDs&quot;    &quot;ST(&quot;    
+##  [35,] &quot;STDs&quot;    &quot;STDs:cn&quot;
+##  [36,] &quot;STDs&quot;    &quot;STDs:cc&quot;
+##  [37,] &quot;STDs&quot;    &quot;STDs:vc&quot;
+##  [38,] &quot;STDs&quot;    &quot;STD:-c&quot; 
+##  [39,] &quot;STDs&quot;    &quot;STDs:s&quot; 
+##  [40,] &quot;STDs&quot;    &quot;Sid&quot;    
+##  [41,] &quot;STDs&quot;    &quot;Sh&quot;     
+##  [42,] &quot;STDs&quot;    &quot;STDs:mc&quot;
+##  [43,] &quot;STDs&quot;    &quot;STD:A&quot;  
+##  [44,] &quot;STDs&quot;    &quot;STD:HI&quot; 
+##  [45,] &quot;STDs&quot;    &quot;SB&quot;     
+##  [46,] &quot;STDs&quot;    &quot;STD:HP&quot; 
+##  [47,] &quot;ST(&quot;     &quot;STDs:cn&quot;
+##  [48,] &quot;ST(&quot;     &quot;STDs:cc&quot;
+##  [49,] &quot;ST(&quot;     &quot;STDs:vc&quot;
+##  [50,] &quot;ST(&quot;     &quot;STD:-c&quot; 
+##  [51,] &quot;ST(&quot;     &quot;STDs:s&quot; 
+##  [52,] &quot;ST(&quot;     &quot;Sid&quot;    
+##  [53,] &quot;ST(&quot;     &quot;Sh&quot;     
+##  [54,] &quot;ST(&quot;     &quot;STDs:mc&quot;
+##  [55,] &quot;ST(&quot;     &quot;STD:A&quot;  
+##  [56,] &quot;ST(&quot;     &quot;STD:HI&quot; 
+##  [57,] &quot;ST(&quot;     &quot;SB&quot;     
+##  [58,] &quot;ST(&quot;     &quot;STD:HP&quot; 
+##  [59,] &quot;STDs:cn&quot; &quot;STDs:cc&quot;
+##  [60,] &quot;STDs:cn&quot; &quot;STDs:vc&quot;
+##  [61,] &quot;STDs:cn&quot; &quot;STD:-c&quot; 
+##  [62,] &quot;STDs:cn&quot; &quot;STDs:s&quot; 
+##  [63,] &quot;STDs:cn&quot; &quot;Sid&quot;    
+##  [64,] &quot;STDs:cn&quot; &quot;Sh&quot;     
+##  [65,] &quot;STDs:cn&quot; &quot;STDs:mc&quot;
+##  [66,] &quot;STDs:cn&quot; &quot;STD:A&quot;  
+##  [67,] &quot;STDs:cn&quot; &quot;STD:HI&quot; 
+##  [68,] &quot;STDs:cn&quot; &quot;SB&quot;     
+##  [69,] &quot;STDs:cn&quot; &quot;STD:HP&quot; 
+##  [70,] &quot;STDs:cc&quot; &quot;STDs:vc&quot;
+##  [71,] &quot;STDs:cc&quot; &quot;STD:-c&quot; 
+##  [72,] &quot;STDs:cc&quot; &quot;STDs:s&quot; 
+##  [73,] &quot;STDs:cc&quot; &quot;Sid&quot;    
+##  [74,] &quot;STDs:cc&quot; &quot;Sh&quot;     
+##  [75,] &quot;STDs:cc&quot; &quot;STDs:mc&quot;
+##  [76,] &quot;STDs:cc&quot; &quot;STD:A&quot;  
+##  [77,] &quot;STDs:cc&quot; &quot;STD:HI&quot; 
+##  [78,] &quot;STDs:cc&quot; &quot;SB&quot;     
+##  [79,] &quot;STDs:cc&quot; &quot;STD:HP&quot; 
+##  [80,] &quot;STDs:vc&quot; &quot;STD:-c&quot; 
+##  [81,] &quot;STDs:vc&quot; &quot;STDs:s&quot; 
+##  [82,] &quot;STDs:vc&quot; &quot;Sid&quot;    
+##  [83,] &quot;STDs:vc&quot; &quot;Sh&quot;     
+##  [84,] &quot;STDs:vc&quot; &quot;STDs:mc&quot;
+##  [85,] &quot;STDs:vc&quot; &quot;STD:A&quot;  
+##  [86,] &quot;STDs:vc&quot; &quot;STD:HI&quot; 
+##  [87,] &quot;STDs:vc&quot; &quot;SB&quot;     
+##  [88,] &quot;STDs:vc&quot; &quot;STD:HP&quot; 
+##  [89,] &quot;STD:-c&quot;  &quot;STDs:s&quot; 
+##  [90,] &quot;STD:-c&quot;  &quot;Sid&quot;    
+##  [91,] &quot;STD:-c&quot;  &quot;Sh&quot;     
+##  [92,] &quot;STD:-c&quot;  &quot;STDs:mc&quot;
+##  [93,] &quot;STD:-c&quot;  &quot;STD:A&quot;  
+##  [94,] &quot;STD:-c&quot;  &quot;STD:HI&quot; 
+##  [95,] &quot;STD:-c&quot;  &quot;SB&quot;     
+##  [96,] &quot;STD:-c&quot;  &quot;STD:HP&quot; 
+##  [97,] &quot;STDs:s&quot;  &quot;Sid&quot;    
+##  [98,] &quot;STDs:s&quot;  &quot;Sh&quot;     
+##  [99,] &quot;STDs:s&quot;  &quot;STDs:mc&quot;
+## [100,] &quot;STDs:s&quot;  &quot;STD:A&quot;  
+## [101,] &quot;STDs:s&quot;  &quot;STD:HI&quot; 
+## [102,] &quot;STDs:s&quot;  &quot;SB&quot;     
+## [103,] &quot;STDs:s&quot;  &quot;STD:HP&quot; 
+## [104,] &quot;Sid&quot;     &quot;Sh&quot;     
+## [105,] &quot;Sid&quot;     &quot;STDs:mc&quot;
+## [106,] &quot;Sid&quot;     &quot;STD:A&quot;  
+## [107,] &quot;Sid&quot;     &quot;STD:HI&quot; 
+## [108,] &quot;Sid&quot;     &quot;SB&quot;     
+## [109,] &quot;Sid&quot;     &quot;STD:HP&quot; 
+## [110,] &quot;Sh&quot;      &quot;STDs:mc&quot;
+## [111,] &quot;Sh&quot;      &quot;STD:A&quot;  
+## [112,] &quot;Sh&quot;      &quot;STD:HI&quot; 
+## [113,] &quot;Sh&quot;      &quot;SB&quot;     
+## [114,] &quot;Sh&quot;      &quot;STD:HP&quot; 
+## [115,] &quot;STDs:mc&quot; &quot;STD:A&quot;  
+## [116,] &quot;STDs:mc&quot; &quot;STD:HI&quot; 
+## [117,] &quot;STDs:mc&quot; &quot;SB&quot;     
+## [118,] &quot;STDs:mc&quot; &quot;STD:HP&quot; 
+## [119,] &quot;STD:A&quot;   &quot;STD:HI&quot; 
+## [120,] &quot;STD:A&quot;   &quot;SB&quot;     
+## [121,] &quot;STD:A&quot;   &quot;STD:HP&quot; 
+## [122,] &quot;STD:HI&quot;  &quot;SB&quot;     
+## [123,] &quot;STD:HI&quot;  &quot;STD:HP&quot; 
+## [124,] &quot;SB&quot;      &quot;STD:HP&quot;</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="missing-values.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">image</span>(x)</span></code></pre></div>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 Here is a missing value plots by variables of the first 100 data rows.</p>
@@ -493,9 +369,15 @@ Here is a missing value plots by variables of the first 100 data rows.</p>
 <span id="cb8-3"><a href="missing-values.html#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">gather</span>(key, value, <span class="sc">-</span>id) <span class="sc">%&gt;%</span> </span>
 <span id="cb8-4"><a href="missing-values.html#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">missing =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(value), <span class="st">&quot;yes&quot;</span>, <span class="st">&quot;no&quot;</span>))</span>
 <span id="cb8-5"><a href="missing-values.html#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="missing-values.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidyex, <span class="fu">aes</span>(<span class="at">x =</span> key, <span class="at">y =</span> <span class="fu">fct_rev</span>(id), <span class="at">fill =</span> value)) <span class="sc">+</span></span>
-<span id="cb8-7"><a href="missing-values.html#cb8-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb8-8"><a href="missing-values.html#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;grey80&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">na.value =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span> <span class="fu">theme_bw</span>()</span></code></pre></div>
+<span id="cb8-6"><a href="missing-values.html#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(tidyex, <span class="fu">aes</span>(<span class="at">x =</span> key, <span class="at">y =</span> <span class="fu">fct_rev</span>(<span class="fu">fct_reorder</span>(id,<span class="fu">as.integer</span>(id))),</span>
+<span id="cb8-7"><a href="missing-values.html#cb8-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">fill =</span> value)) <span class="sc">+</span></span>
+<span id="cb8-8"><a href="missing-values.html#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;white&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb8-9"><a href="missing-values.html#cb8-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>(<span class="at">low =</span> <span class="st">&quot;grey80&quot;</span>, <span class="at">high =</span> <span class="st">&quot;red&quot;</span>, <span class="at">na.value =</span> <span class="st">&quot;black&quot;</span>) <span class="sc">+</span></span>
+<span id="cb8-10"><a href="missing-values.html#cb8-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_discrete</span>(<span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">n.dodge=</span><span class="dv">2</span>)) <span class="sc">+</span></span>
+<span id="cb8-11"><a href="missing-values.html#cb8-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ylab</span>(<span class="st">&quot;&quot;</span>) <span class="sc">+</span></span>
+<span id="cb8-12"><a href="missing-values.html#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlab</span>(<span class="st">&quot;column names&quot;</span>) <span class="sc">+</span></span>
+<span id="cb8-13"><a href="missing-values.html#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">size =</span> <span class="dv">6</span>), </span>
+<span id="cb8-14"><a href="missing-values.html#cb8-14" aria-hidden="true" tabindex="-1"></a>        <span class="at">axis.text.y =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">4</span>))</span></code></pre></div>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="using-problem-2-missing-value-function" class="section level2" number="4.4">
@@ -539,8 +421,8 @@ Here is a missing value plots by variables of the first 100 data rows.</p>
 <span id="cb9-37"><a href="missing-values.html#cb9-37" aria-hidden="true" tabindex="-1"></a>  p1 <span class="ot">=</span> <span class="fu">ggplot</span>(miss_rows,<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">reorder</span>(id, <span class="sc">-</span>missing_rows), </span>
 <span id="cb9-38"><a href="missing-values.html#cb9-38" aria-hidden="true" tabindex="-1"></a>                            <span class="at">y =</span> missing_rows)) <span class="sc">+</span> </span>
 <span id="cb9-39"><a href="missing-values.html#cb9-39" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_col</span>(<span class="at">fill =</span> <span class="st">&#39;light blue&#39;</span>) <span class="sc">+</span> </span>
-<span id="cb9-40"><a href="missing-values.html#cb9-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">n.dodge=</span><span class="dv">2</span>)) <span class="sc">+</span></span>
-<span id="cb9-41"><a href="missing-values.html#cb9-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&#39;&#39;</span>)</span>
+<span id="cb9-40"><a href="missing-values.html#cb9-40" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&#39;&#39;</span>) <span class="sc">+</span></span>
+<span id="cb9-41"><a href="missing-values.html#cb9-41" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">size =</span> <span class="dv">5</span>))</span>
 <span id="cb9-42"><a href="missing-values.html#cb9-42" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (percents){</span>
 <span id="cb9-43"><a href="missing-values.html#cb9-43" aria-hidden="true" tabindex="-1"></a>    p1 <span class="ot">=</span> p1 <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">&#39;% rows</span><span class="sc">\n</span><span class="st"> missing&#39;</span>) <span class="sc">+</span> </span>
 <span id="cb9-44"><a href="missing-values.html#cb9-44" aria-hidden="true" tabindex="-1"></a>      <span class="fu">scale_y_continuous</span>(<span class="at">limits =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">100</span>))</span>
@@ -570,11 +452,11 @@ Here is a missing value plots by variables of the first 100 data rows.</p>
 <span id="cb9-68"><a href="missing-values.html#cb9-68" aria-hidden="true" tabindex="-1"></a>  p2 <span class="ot">=</span> <span class="fu">ggplot</span>(tidy_pattern, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(key, <span class="sc">-</span>value, sum), <span class="at">y =</span> <span class="fu">fct_rev</span>(<span class="fu">fct_reorder</span>(id,<span class="fu">as.integer</span>(id))), <span class="at">fill =</span> value)) <span class="sc">+</span></span>
 <span id="cb9-69"><a href="missing-values.html#cb9-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_tile</span>(<span class="at">color =</span> <span class="st">&quot;white&quot;</span>, <span class="fu">aes</span>(<span class="at">alpha =</span> complete))  <span class="sc">+</span></span>
 <span id="cb9-70"><a href="missing-values.html#cb9-70" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_fill_manual</span>(<span class="at">values=</span><span class="fu">c</span>(<span class="st">&quot;gray&quot;</span>, <span class="st">&quot;mediumpurple1&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb9-71"><a href="missing-values.html#cb9-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_discrete</span>(<span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">n.dodge=</span><span class="dv">2</span>)) <span class="sc">+</span></span>
-<span id="cb9-72"><a href="missing-values.html#cb9-72" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&#39;variable&#39;</span>) <span class="sc">+</span></span>
-<span id="cb9-73"><a href="missing-values.html#cb9-73" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&#39;missing patterns&#39;</span>)<span class="sc">+</span></span>
-<span id="cb9-74"><a href="missing-values.html#cb9-74" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_alpha</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>))<span class="sc">+</span></span>
-<span id="cb9-75"><a href="missing-values.html#cb9-75" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span>
+<span id="cb9-71"><a href="missing-values.html#cb9-71" aria-hidden="true" tabindex="-1"></a>    <span class="fu">xlab</span>(<span class="st">&#39;variable&#39;</span>) <span class="sc">+</span></span>
+<span id="cb9-72"><a href="missing-values.html#cb9-72" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ylab</span>(<span class="st">&#39;missing patterns&#39;</span>)<span class="sc">+</span></span>
+<span id="cb9-73"><a href="missing-values.html#cb9-73" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_alpha</span>(<span class="at">range =</span> <span class="fu">c</span>(<span class="fl">0.5</span>, <span class="fl">1.0</span>))<span class="sc">+</span></span>
+<span id="cb9-74"><a href="missing-values.html#cb9-74" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">&quot;none&quot;</span>, </span>
+<span id="cb9-75"><a href="missing-values.html#cb9-75" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">90</span>, <span class="at">size =</span> <span class="dv">5</span>))</span>
 <span id="cb9-76"><a href="missing-values.html#cb9-76" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb9-77"><a href="missing-values.html#cb9-77" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (<span class="fu">length</span>(complete_row) <span class="sc">!=</span> <span class="dv">0</span>){</span>
 <span id="cb9-78"><a href="missing-values.html#cb9-78" aria-hidden="true" tabindex="-1"></a>    li <span class="ot">=</span> <span class="fu">levels</span>(<span class="fu">fct_reorder</span>(tidy_pattern<span class="sc">$</span>key, <span class="sc">-</span>tidy_pattern<span class="sc">$</span>value, sum))</span>
@@ -591,8 +473,7 @@ Here is a missing value plots by variables of the first 100 data rows.</p>
 <span id="cb9-89"><a href="missing-values.html#cb9-89" aria-hidden="true" tabindex="-1"></a>    <span class="fu">plot_layout</span>(<span class="at">design =</span> layout)</span>
 <span id="cb9-90"><a href="missing-values.html#cb9-90" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span> (graphs)</span>
 <span id="cb9-91"><a href="missing-values.html#cb9-91" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="missing-values.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(ex) <span class="ot">=</span> <span class="fu">abbreviate</span>(<span class="fu">names</span>(ex), <span class="at">minlength =</span> <span class="dv">2</span>)</span>
-<span id="cb10-2"><a href="missing-values.html#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">missing_plots</span>(ex, <span class="cn">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="missing-values.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">missing_plots</span>(ex, <span class="cn">TRUE</span>)</span></code></pre></div>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>As shown by the graph, we can see that both columns of name STDs: Time since first diagnosis and STDs: Time since last diagnosis contains a high number of missing data. We might need to looking into these two columns and decide whether to keep them given this high volume of NAs. Other missing values takes up some portion of each column.</p>
 
