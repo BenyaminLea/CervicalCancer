@@ -36,6 +36,7 @@ colSums(is.na(ex)) %>%sort(decreasing = TRUE)
 Here is a missing value plots with heat map of the first 100 data rows. 
 ```{r }
 library(mi)
+names(ex) = abbreviate(names(ex), minlength = 2)
 datasetdf <- as.data.frame(ex)
 x <- missing_data.frame(datasetdf)
 image(x)
@@ -47,9 +48,15 @@ tidyex <- ex %>%
     gather(key, value, -id) %>% 
     mutate(missing = ifelse(is.na(value), "yes", "no"))
 
-ggplot(tidyex, aes(x = key, y = fct_rev(id), fill = value)) +
+ggplot(tidyex, aes(x = key, y = fct_rev(fct_reorder(id,as.integer(id))),
+                   fill = value)) +
   geom_tile(color = "white") + 
-  scale_fill_gradient(low = "grey80", high = "red", na.value = "black") + theme_bw()
+  scale_fill_gradient(low = "grey80", high = "red", na.value = "black") +
+  scale_y_discrete(guide = guide_axis(n.dodge=2)) +
+  ylab("") +
+  xlab("column names") +
+  theme(axis.text.x = element_text(angle = 90, size = 6), 
+        axis.text.y = element_text(size = 4))
 ```
 
 ## Using Problem 2 missing value function
@@ -93,7 +100,8 @@ missing_plots = function(sample_data, percents){
   p1 = ggplot(miss_rows,aes(x = reorder(id, -missing_rows), 
                             y = missing_rows)) + 
     geom_col(fill = 'light blue') + 
-    xlab('')
+    xlab('') +
+    theme(axis.text.x = element_text(angle = 90, size = 5))
   if (percents){
     p1 = p1 + ylab('% rows\n missing') + 
       scale_y_continuous(limits = c(0,100))
@@ -126,7 +134,8 @@ missing_plots = function(sample_data, percents){
     xlab('variable') +
     ylab('missing patterns')+
     scale_alpha(range = c(0.5, 1.0))+
-    theme(legend.position = "none")
+    theme(legend.position = "none", 
+          axis.text.x = element_text(angle = 90, size = 5))
   
   if (length(complete_row) != 0){
     li = levels(fct_reorder(tidy_pattern$key, -tidy_pattern$value, sum))
@@ -149,5 +158,6 @@ missing_plots = function(sample_data, percents){
 ```{r}
 missing_plots(ex, TRUE)
 ```
+
 As shown by the graph, we can see that both columns of name STDs: Time since first diagnosis and STDs: Time since last diagnosis contains a high number of missing data. We might need to looking into these two columns and decide whether to keep them given this high volume of NAs. Other missing values takes up some portion of each column.
 
