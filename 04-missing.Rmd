@@ -1,1 +1,155 @@
-# Missing values
+---
+title: "missing-values"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# this prevents package loading message from appearing in the rendered version of your problem set
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = TRUE)
+```
+
+
+```{r}
+library(openintro)
+library(tidyverse)
+library(ggplot2)
+library(GGally)
+library(ggalluvial)
+library(dplyr)
+library(tidyverse)
+library(patchwork)
+```
+
+## DataSet
+In our data set of risk factors of cervical cancer, the missing values were original represented by question marks "?". We will first replace those marks with NA and then extract the first 100 rows as our example for this frist draft.
+```{r }
+df <- read_csv("risk_factors_cervical_cancer.csv", show_col_types = FALSE)
+df <- df %>% na_if('?')
+ex <- head(df, 100)
+ex <- as.data.frame(apply(ex, 2, as.numeric))
+```
+
+## Missing Values by Column
+```{r}
+colSums(is.na(ex)) %>%sort(decreasing = TRUE)
+```
+
+## Missing Value Plots
+Here is a missing value plots with heat map of the first 100 data rows. 
+```{r }
+library(mi)
+datasetdf <- as.data.frame(ex)
+x <- missing_data.frame(datasetdf)
+image(x)
+```
+Here is a missing value plots by variables of the first 100 data rows. 
+```{r}
+tidyex <- ex %>% 
+    rownames_to_column("id") %>% 
+    gather(key, value, -id) %>% 
+    mutate(missing = ifelse(is.na(value), "yes", "no"))
+
+ggplot(tidyex, aes(x = key, y = fct_rev(id), fill = value)) +
+  geom_tile(color = "white") + 
+  scale_fill_gradient(low = "grey80", high = "red", na.value = "black") + theme_bw()
+```
+
+## Using Problem 2 missing value function
+```{r}
+missing_plots = function(sample_data, percents){
+  missing_patterns <- data.frame(is.na(sample_data)) %>%
+    group_by_all() %>%
+    count(name = "count", sort = TRUE) %>%
+    ungroup() %>%
+    rownames_to_column("id")
+  missing_patterns = missing_patterns %>%
+    rowwise() %>%
+    mutate(complete = ifelse(sum(c_across(
+    names(missing_patterns)[! names(missing_patterns) %in% 
+                              c("count", "id")])) == 0, 1.1, 1))
+  
+  complete_row = missing_patterns[missing_patterns$complete == 1.1, ]$id
+  
+  if (percents){
+    missing_patterns = missing_patterns %>%
+      mutate(count = count / nrow(sample_data) * 100)
+  }
+
+  # gather
+  tidy_pattern = missing_patterns %>%
+    select(-count) %>%
+    gather(key, value, -c(id, complete))
+
+  # missing values by rows
+  missing_rows = colSums(is.na(sample_data)) %>%
+    sort(decreasing = TRUE)
+  miss_rows=data.frame(missing_rows)
+  miss_rows = miss_rows %>%
+    rownames_to_column("id")
+  if (percents){
+    miss_rows = miss_rows %>%
+      mutate(missing_rows = missing_rows/nrow(sample_data)*100)
+  }
+  
+  # p1 is a plot of missing values by rows
+  p1 = ggplot(miss_rows,aes(x = reorder(id, -missing_rows), 
+                            y = missing_rows)) + 
+    geom_col(fill = 'light blue') + 
+    xlab('')
+  if (percents){
+    p1 = p1 + ylab('% rows\n missing') + 
+      scale_y_continuous(limits = c(0,100))
+  }
+  else{
+    p1 = p1 + ylab('num rows\n missing')
+  }
+  
+  # p3 is a plot of missing patterns by count
+  p3 = ggplot(missing_patterns, aes(x = count, 
+                                    y = fct_reorder(id,
+                                        as.integer(id))))+
+    geom_col(fill = 'steelblue3', aes(alpha = complete)) +
+    ylab('') +
+    scale_y_discrete(limits=rev)+
+    scale_alpha(range = c(0.5, 1.0))+
+    theme(legend.position = "none")
+  if (percents){
+    p3 = p3 + xlab('% rows') +
+      scale_x_continuous(limits = c(0,100))
+  }
+  else{
+    p3 = p3 + xlab('row count')
+  }
+  
+  # p2 is a plot of missing patterns by columns
+  p2 = ggplot(tidy_pattern, aes(x = fct_reorder(key, -value, sum), y = fct_rev(fct_reorder(id,as.integer(id))), fill = value)) +
+    geom_tile(color = "white", aes(alpha = complete))  +
+    scale_fill_manual(values=c("gray", "mediumpurple1")) +
+    xlab('variable') +
+    ylab('missing patterns')+
+    scale_alpha(range = c(0.5, 1.0))+
+    theme(legend.position = "none")
+  
+  if (length(complete_row) != 0){
+    li = levels(fct_reorder(tidy_pattern$key, -tidy_pattern$value, sum))
+    p2 = p2 + annotate('text', x = li[as.integer(length(li)/2)], 
+                       y = complete_row, label = 'complete cases')
+  }
+  
+  layout <- "
+  AAAA#
+  BBBBC
+  BBBBC
+  "
+  graphs = p1 + p2 + p3 +
+    plot_layout(design = layout)
+  return (graphs)
+}
+```
+
+
+```{r}
+missing_plots(ex, TRUE)
+```
+As shown by the graph, we can see that both columns of name STDs: Time since first diagnosis and STDs: Time since last diagnosis contains a high number of missing data. We might need to looking into these two columns and decide whether to keep them given this high volume of NAs. Other missing values takes up some portion of each column.
+
