@@ -1,1 +1,54 @@
 # Data transformation
+
+Our data for this project on the topic of cervical cancer risk factors was directly downloaded from UCI Machine Learning Repository. The download contains one file only, risk_factors_cervical_cancer.csv. Since the file is in csv format, there is little we need to perform on transforming the data, as R can directly read the data from csv file in an efficient and accurate way.
+
+We would like to present some basic information on the data, including the variable names, variable types, data set shape, and basic observations on the data structure.
+
+## Variable Names and Variable Types
+(int)   Age
+(int)   Number of sexual partners
+(int)   First sexual intercourse (age)
+(int)   Num of pregnancies
+(bool)  Smokes
+(float) Smokes (years)
+(float) Smokes (packs/year)
+(bool)  Hormonal Contraceptives
+(float) Hormonal Contraceptives (years)
+(bool)  IUD
+(float) IUD (years)
+(bool)  STDs
+(int)   STDs (number)
+(bool)  STDs:condylomatosis
+(bool)  STDs:cervical condylomatosis
+(bool)  STDs:vaginal condylomatosis
+(bool)  STDs:vulvo-perineal condylomatosis
+(bool)  STDs:syphilis
+(bool)  STDs:pelvic inflammatory disease
+(bool)  STDs:genital herpes
+(bool)  STDs:molluscum contagiosum
+(bool)  STDs:AIDS
+(bool)  STDs:HIV
+(bool)  STDs:Hepatitis B
+(bool)  STDs:HPV
+(int)   STDs: Number of diagnosis
+(int)   STDs: Time since first diagnosis
+(int)   STDs: Time since last diagnosis
+(bool)  Dx:Cancer
+(bool)  Dx:CIN
+(bool)  Dx:HPV
+(bool)  Dx
+(bool)  Hinselmann: target variable
+(bool)  Schiller: target variable
+(bool)  Cytology: target variable
+(bool)  Biopsy: target variable
+
+## Dataset Shape and Observations
+
+Row number: 858
+Column number: 36
+
+Observations: There are values '?' in the dataset, indicating the missing of values. The patients may decided not to answer such specific questions that relates to the specific columns. That could be reasons of privacy concerns or personal misunderstandings. 
+
+Smoke years, Hormonal Contraceptives years, and IUD years values are not integers but floats. This means when doing the survey, patients include months or days into the record. Specific down to months would make the data more specific and possibly help analysis on correlations between these year variables to cervical cancer to be more reliable.
+
+Some variables seem related by their properties. For example, when a patient do not smoke, her smoke years variable would be 0. When a patient did not have any number of diagnosis on STD, the Time since first diagnosis and Time since last diagnosis of STD variables are left to be '?'. This is a logical missing values in this circumstance.
