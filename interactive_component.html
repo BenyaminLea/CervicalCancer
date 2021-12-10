@@ -1,0 +1,119 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>US Presidential Election Results</title>
+    <style>
+        .tract {
+            stroke: white; stroke-width: 0.15px; pointer-events: all;
+        }
+        
+        .tract:hover {
+            stroke: orange; pointer-events: all;
+        }
+        
+        .tract-border {
+            fill: none; stroke-width: 0.15px; pointer-events: none;
+        }
+        
+        @media (max-width: 800px) {
+            .label {
+                transform: rotate(-45deg) translate(-10px, 25px);
+            }
+        }
+        
+        .tract-border-state {
+            fill: none;
+            stroke: black;
+            stroke-width: 0.7px;
+            pointer-events: none;
+        }
+        
+        .legend {
+            font-family: sans-serif; font-size: 10pt;
+        }
+        
+        .legendTitle {
+            font-weight: bold; font-size: 11pt;
+        }
+        
+        .background {fill: #f6f7ed;}
+        
+        body {background: #f6f7ed;}
+        
+        .bar {
+            font-family: sans-serif; font-size: 9pt;
+        }
+        
+        #cityLegend {
+            font-family: sans-serif; text-anchor: middle;
+        }
+        
+        #details .background {
+            fill: #f6f7ed; fill-opacity: 0.7;
+        }
+        
+        svg {width: 100%;}
+        
+        .tooltip {
+            top: 100px;
+            left: 100px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            border: 2px solid black;
+            background: #333;
+            opacity: .9;
+            color: white;
+            padding: 10px;
+            min-width: 375px;
+            min-width: 36.75vmin;
+            font-size: 2.25vmin;
+            line-height: 24pt;
+            font-weight: lighter;
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script type="text/javascript">
+    var width = 960;
+    var height = 500;
+
+    var projection = d3.geo.albersUsa()
+				   .translate([width/2, height/2]) 
+				   .scale([1000]);       
+        
+    var path = d3.geo.path()              
+		  	 .projection(projection);
+		  	 
+    var svg = d3.select("body")
+			.append("svg")
+			.attr("width", width)
+			.attr("height", height);
+			
+    var div = d3.select("body")
+		    .append("div")   
+    		.attr("class", "tooltip")               
+    		.style("opacity", 0);
+
+
+    d3.json("https://raw.githubusercontent.com/BenyaminLea/CervicalCancer/main/resources/us.json", function(json) {
+    
+    d3.csv("https://raw.githubusercontent.com/BenyaminLea/CervicalCancer/main/resources/USCSOverviewMap.csv", function(data) {
+   console.log(data)
+   console.log(json)
+	})
+})
+
+
+	
+
+    </script>
+
+</body>
+
+</html>
