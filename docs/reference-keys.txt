@@ -1,6 +1,8 @@
 introduction
 data-sources
 data-transformation
+variable-names-and-variable-types
+dataset-shape-and-observations
 missing-values
 dataset
 missing-values-by-column
@@ -9,5 +11,3 @@ using-problem-2-missing-value-function
 results
 interactive-component
 conclusion
-variable-names-and-variable-types
-dataset-shape-and-observations
