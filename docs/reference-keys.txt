@@ -11,3 +11,11 @@ using-problem-2-missing-value-function
 results
 interactive-component
 conclusion
+age
+number-of-sexual-partners
+first-sexual-intercourse-age
+num-of-pregnancies
+smoking
+hormonal-contraceptives
+iud
+stds
