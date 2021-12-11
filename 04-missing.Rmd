@@ -1,12 +1,5 @@
 # Missing values
 
-
-```{r setup, include=FALSE}
-# this prevents package loading message from appearing in the rendered version of your problem set
-knitr::opts_chunk$set(warning = FALSE, message = FALSE, echo = TRUE)
-```
-
-
 ```{r}
 library(openintro)
 library(tidyverse)
@@ -34,7 +27,7 @@ colSums(is.na(ex)) %>%sort(decreasing = TRUE)
 
 ## Missing Value Plots
 Here is a missing value plots with heat map of the first 100 data rows. 
-```{r }
+```{r warning=FALSE}
 library(mi)
 names(ex) = abbreviate(names(ex), minlength = 2)
 datasetdf <- as.data.frame(ex)
@@ -42,7 +35,7 @@ x <- missing_data.frame(datasetdf)
 image(x)
 ```
 Here is a missing value plots by variables of the first 100 data rows. 
-```{r}
+```{r warning=FALSE}
 tidyex <- ex %>% 
     rownames_to_column("id") %>% 
     gather(key, value, -id) %>% 
