@@ -5,42 +5,13 @@ Our data for this project on the topic of cervical cancer risk factors was direc
 We would like to present some basic information on the data, including the variable names, variable types, data set shape, and basic observations on the data structure.
 
 ## Variable Names and Variable Types
-(int)   Age
-(int)   Number of sexual partners
-(int)   First sexual intercourse (age)
-(int)   Num of pregnancies
-(bool)  Smokes
-(float) Smokes (years)
-(float) Smokes (packs/year)
-(bool)  Hormonal Contraceptives
-(float) Hormonal Contraceptives (years)
-(bool)  IUD
-(float) IUD (years)
-(bool)  STDs
-(int)   STDs (number)
-(bool)  STDs:condylomatosis
-(bool)  STDs:cervical condylomatosis
-(bool)  STDs:vaginal condylomatosis
-(bool)  STDs:vulvo-perineal condylomatosis
-(bool)  STDs:syphilis
-(bool)  STDs:pelvic inflammatory disease
-(bool)  STDs:genital herpes
-(bool)  STDs:molluscum contagiosum
-(bool)  STDs:AIDS
-(bool)  STDs:HIV
-(bool)  STDs:Hepatitis B
-(bool)  STDs:HPV
-(int)   STDs: Number of diagnosis
-(int)   STDs: Time since first diagnosis
-(int)   STDs: Time since last diagnosis
-(bool)  Dx:Cancer
-(bool)  Dx:CIN
-(bool)  Dx:HPV
-(bool)  Dx
-(bool)  Hinselmann: target variable
-(bool)  Schiller: target variable
-(bool)  Cytology: target variable
-(bool)  Biopsy: target variable
+```{r echo = FALSE}
+varType <- matrix(c('int','int','int','int','bool','float','float','bool','float','bool','float','bool','int','bool','bool','bool','bool','bool','bool','bool','bool','bool','bool','bool','bool','int','int','int','bool','bool','bool','bool','bool','bool','bool','bool','Age','Number of sexual partners','First sexual intercourse (age)','Num of pregnancies','Smokes','Smokes (years)','Smokes (packs/year)','Hormonal Contraceptives','Hormonal Contraceptives (years)','IUD','IUD (years)','STDs','STDs (number)','STDs:condylomatosis','STDs:cervical condylomatosis','STDs:vaginal condylomatosis','STDs:vulvo-perineal condylomatosis','STDs:syphilis','STDs:pelvic inflammatory disease','STDs:genital herpes','STDs:molluscum contagiosum','STDs:AIDS','STDs:HIV','STDs:Hepatitis B','STDs:HPV','STDs: Number of diagnosis','STDs: Time since first diagnosis','STDs: Time since last diagnosis','Dx:Cancer','Dx:CIN','Dx:HPV','Dx','Hinselmann: target variable','Schiller: target variable','Cytology: target variable','Biopsy: target variable'),ncol=2)
+colnames(varType) = c('Type', 'Variable Name')
+rownames(varType) = 1:36
+varType = as.table(varType)
+varType
+```
 
 ## Dataset Shape and Observations
 
