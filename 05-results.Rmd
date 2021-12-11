@@ -1,1 +1,230 @@
 # Results
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(GGally)
+library(ggalluvial)
+library(dplyr)
+library(tidyverse)
+library(patchwork)
+```
+
+```{r }
+df <- read_csv("risk_factors_cervical_cancer.csv", show_col_types = FALSE)
+df <- df %>% na_if('?')
+colnames(df) = c("Ag", "Nosp","Fsi","Nop","Sm","SmY","SmPY","HC","HCY",
+                 "IUD","IUDY","STD","STDN","STDcon","STDcer","STDvag",
+                 "STDvul","STDsyp","STDpel","STDgen","STDmol","STDaid",
+                 "STDhiv","STDhip","STDhpv","STDND","STDfd","STDld",
+                 "DXc","DXcin","DXhpv","DX","Hn","Sch","Ct","Bp")
+```
+
+## Age
+
+Many cancer diseases relate with age, that older people have higher risks. Is this consistent for cervical cancer in this data set?
+
+
+## Number of Sexual Partners
+
+Does number of sexual partners relate with cervical cancer? How do the 4 different ways of disease diagnosis show differences?
+
+```{r, echo = FALSE}
+g_nosp_bp = ggplot(df, aes(as.integer(Nosp))) + 
+  geom_histogram(color = "grey50", 
+                fill = "lightblue",binwidth = 2) + 
+  facet_wrap(~Bp, scales = "free") + 
+  ylab("Count") + 
+  xlab('Number of Sexual Partners')+
+  ggtitle("Number of Sexual Partners among\n 
+          Biopsy positive and negative") +
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_nosp_ct = ggplot(df, aes(as.integer(Nosp))) + 
+  geom_histogram(color = "grey50", 
+                fill = "lightblue",binwidth = 2) + 
+  facet_wrap(~Ct, scales = "free") + 
+  ylab("Count") + 
+  xlab('Number of Sexual Partners')+
+  ggtitle("Number of Sexual Partners among\n 
+          Cytology positive and negative") +
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_nosp_sch = ggplot(df, aes(as.integer(Nosp))) + 
+  geom_histogram(color = "grey50", 
+                fill = "lightblue",binwidth = 2) + 
+  facet_wrap(~Sch, scales = "free") + 
+  ylab("Count") + 
+  xlab('Number of Sexual Partners')+
+  ggtitle("Number of Sexual Partners among\n 
+          Schiller positive and negative") +
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_nosp_hn = ggplot(df, aes(as.integer(Nosp))) + 
+  geom_histogram(color = "grey50", 
+                fill = "lightblue",binwidth = 2) + 
+  facet_wrap(~Hn, scales = "free") + 
+  ylab("Count") + 
+  xlab('Number of Sexual Partners')+
+  ggtitle("Number of Sexual Partners among\n 
+          Hinselmann positive and negative") +
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+layout <- "
+  AABB
+  CCDD
+  "
+
+g_nosp_bp + g_nosp_ct + g_nosp_sch + g_nosp_hn + 
+  plot_layout(design = layout)
+```
+
+## First sexual intercourse (age)
+
+## Num of pregnancies
+```{r, echo = FALSE}
+g_nop_bp = ggplot(df, aes(as.integer(Nop))) + 
+  geom_histogram(color = "grey50", 
+                fill = "lightblue",binwidth = 2) + 
+  facet_wrap(~Bp, scales = "free") + 
+  ylab("Count") + 
+  xlab('Number of Pregnancies')+
+  ggtitle("Number of Pregnancies among\n 
+          Biopsy positive and negative") +
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_nop_ct = ggplot(df, aes(as.integer(Nop))) + 
+  geom_histogram(color = "grey50", 
+                fill = "lightblue",binwidth = 2) + 
+  facet_wrap(~Ct, scales = "free") + 
+  ylab("Count") + 
+  xlab('Number of Pregnancies')+
+  ggtitle("Number of Pregnancies among\n 
+          Cytology positive and negative") +
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_nop_sch = ggplot(df, aes(as.integer(Nop))) + 
+  geom_histogram(color = "grey50", 
+                fill = "lightblue",binwidth = 2) + 
+  facet_wrap(~Sch, scales = "free") + 
+  ylab("Count") + 
+  xlab('Number of Pregnancies')+
+  ggtitle("Number of Pregnancies among\n 
+          Schiller positive and negative") +
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_nop_hn = ggplot(df, aes(as.integer(Nop))) + 
+  geom_histogram(color = "grey50", 
+                fill = "lightblue",binwidth = 2) + 
+  facet_wrap(~Hn, scales = "free") + 
+  ylab("Count") + 
+  xlab('Number of Pregnancies')+
+  ggtitle("Number of Pregnancies among\n 
+          Hinselmann positive and negative") +
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+layout <- "
+  AABB
+  CCDD
+  "
+
+g_nop_bp + g_nop_ct + g_nop_sch + g_nop_hn + 
+  plot_layout(design = layout)
+```
+
+## Smoking
+
+Smoking is related to many diseases and is seen as one of the most common factors to severe diseases including lung cancer and hear diseases. Does smoking relates to Cervical Cancer as well?
+
+A mosaic plot between boolean variables smoking and biopsy results.
+
+```{r, fig.height = 3, fig.width = 3, fig.align = "center"}
+library(vcd)
+df$Sm = as.integer(df$Sm)
+mosaic(Sm~Bp, data = df,direction = c("v", "h"),
+       labeling = labeling_border(set_varnames = c(Bp = "Biopsy", 
+                                   Sm = "Smoke")))
+```
+
+Smoke years relation with cervical cancer.
+```{r, echo = FALSE}
+g_sm_bp = ggplot(df, aes(as.double(SmY))) + 
+  geom_histogram(color = "grey50", 
+                fill = "lightblue", binwidth = 5) + 
+  facet_wrap(~Bp, scales = "free") + 
+  ylab("Count") + 
+  xlab('Smokes (years)')+
+  ggtitle("Smokes (years) among\n 
+          Biopsy positive and negative") +
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_sm_ct = ggplot(df, aes(as.double(SmY))) +
+  geom_histogram(color = "grey50", 
+                fill = "lightblue",binwidth = 5) + 
+  facet_wrap(~Ct, scales = "free") + 
+  ylab("Count") + 
+  xlab('Smokes (years)')+
+  ggtitle("Smokes (years) among\n 
+          Cytology positive and negative") +
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_sm_sch = ggplot(df, aes(as.double(SmY))) + 
+  geom_histogram(color = "grey50", 
+                fill = "lightblue",binwidth = 5) + 
+  facet_wrap(~Sch, scales = "free") + 
+  ylab("Count") + 
+  xlab('Smokes (years)')+
+  ggtitle("Smokes (years) among\n 
+          Schiller positive and negative") +
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_sm_hn = ggplot(df, aes(as.double(SmY))) + 
+  geom_histogram(color = "grey50", 
+                fill = "lightblue",binwidth = 5) + 
+  facet_wrap(~Hn, scales = "free") + 
+  ylab("Count") + 
+  xlab('Smokes (years)')+
+  ggtitle("Smokes (years) among\n 
+          Hinselmann positive and negative") +
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+layout <- "
+  AABB
+  CCDD
+  "
+
+g_sm_bp + g_sm_ct + g_sm_sch + g_sm_hn + 
+  plot_layout(design = layout)
+```
+
+## Hormonal Contraceptives
+
+## IUD
+
+## STDs
+
+
+
