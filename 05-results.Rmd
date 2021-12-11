@@ -133,7 +133,66 @@ g_nosp_bp + g_nosp_ct + g_nosp_sch + g_nosp_hn +
 
 ## First sexual intercourse (age)
 
+Does first sexual intercourse time correlate with cervical cancer?
+```{r}
+g_fsi_bp = ggplot(df, aes(as.factor(Bp), as.integer(Fsi))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Biopsy")+
+  ylab("First Sexual Intercourse (age)") +
+  ggtitle("First Sexual Intercourse (age) among Biopsy\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_fsi_ct = ggplot(df, aes(as.factor(Ct), as.integer(Fsi))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Cytology")+
+  ylab("First Sexual Intercourse (age)") +
+  ggtitle("First Sexual Intercourse (age) among Cytology\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_fsi_sch = ggplot(df, aes(as.factor(Sch), as.integer(Fsi))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Schiller")+
+  ylab("First Sexual Intercourse (age)") +
+  ggtitle("First Sexual Intercourse (age) among Schiller\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_fsi_hn = ggplot(df, aes(as.factor(Hn), as.integer(Fsi))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Hinselmann")+
+  ylab("First Sexual Intercourse (age)") +
+  ggtitle("First Sexual Intercourse (age) among Hinselmann\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+layout <- "
+  AABB
+  CCDD
+  "
+
+g_fsi_bp + g_fsi_ct + g_fsi_sch + g_fsi_hn + 
+  plot_layout(design = layout)
+```
+
+
 ## Num of pregnancies
+
+Pregnancy and giving birth affects cervical tissue in many ways. Would number of pregnancy relate to cervical cancer chances?
+
 ```{r, echo = FALSE}
 g_nop_bp = ggplot(df, aes(as.integer(Nop))) + 
   geom_histogram(color = "grey50", 
@@ -206,7 +265,7 @@ mosaic(Sm~Bp, data = df,direction = c("v", "h"),
                                    Sm = "Smoke")))
 ```
 
-Smoke years relation with cervical cancer.
+Smoke years times Smoke packs per year to calculate total packs of cigarettes smoked. Investigate the relation with cervical cancer.
 ```{r, echo = FALSE}
 df$SmT = as.double(df$SmY) * as.double(df$SmPY)
 g_sm_bp = ggplot(df, aes(as.factor(Bp), as.double(SmT))) +
@@ -264,9 +323,208 @@ g_sm_bp + g_sm_ct + g_sm_sch + g_sm_hn +
 
 ## Hormonal Contraceptives
 
+Hormonal Contraceptives are birth control methods, considered as safe and reliable ways to prevent pregnancy for most people. Would Hormonal Contraceptives be a factor for cervical cancer?
+
+A mosaic plot between boolean variables Hormonal Contraceptives and biopsy results.
+
+```{r, fig.height = 3, fig.width = 3, fig.align = "center"}
+df$HC = as.integer(df$HC)
+mosaic(HC~Bp, data = df,direction = c("v", "h"),
+       labeling = labeling_border(set_varnames = c(Bp = "Biopsy", 
+                                   HC = "Hormonal Contraceptives")))
+```
+
+We investigate further on number of years of using Hormonal Contraceptives and its relation with cervical cancer.
+
+```{r, echo = FALSE}
+g_hc_bp = ggplot(df, aes(as.factor(Bp), as.double(HCY))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Biopsy")+
+  ylab("Hormonal Contraceptives Years") +
+  ggtitle("Hormonal Contraceptives Years among Biopsy\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_hc_ct = ggplot(df, aes(as.factor(Ct), as.double(HCY))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Cytology")+
+  ylab("Hormonal Contraceptives Years") +
+  ggtitle("Hormonal Contraceptives Years among Cytology\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_hc_sch = ggplot(df, aes(as.factor(Sch), as.double(HCY))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Schiller")+
+  ylab("Hormonal Contraceptives Years") +
+  ggtitle("Hormonal Contraceptives Years among Schiller\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_hc_hn = ggplot(df, aes(as.factor(Hn), as.double(HCY))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Hinselmann")+
+  ylab("Hormonal Contraceptives Years") +
+  ggtitle("Hormonal Contraceptives Years among Hinselmann\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+layout <- "
+  AABB
+  CCDD
+  "
+
+g_hc_bp + g_hc_ct + g_hc_sch + g_hc_hn + 
+  plot_layout(design = layout)
+```
+
 ## IUD
+
+An IUD is a tiny device that's put into one's uterus to prevent pregnancy. It's long-term, reversible, and one of the most effective birth control methods. However, it is an extremely painful process and would make periods become heavier, more painful and longer. Question here would be if IUD relates with cervical cancer.
+
+A mosaic plot between boolean variables IUD and biopsy results.
+
+```{r, fig.height = 3, fig.width = 3, fig.align = "center"}
+df$IUD = as.integer(df$IUD)
+mosaic(IUD~Bp, data = df,direction = c("v", "h"),
+       labeling = labeling_border(set_varnames = c(Bp = "Biopsy", 
+                                   IUD = "IUD")))
+```
+
+We investigate further on number of years of using IUD and its relation with cervical cancer.
+
+```{r, echo = FALSE}
+g_iud_bp = ggplot(df, aes(as.factor(Bp), as.double(IUDY))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Biopsy")+
+  ylab("IUD Years") +
+  ggtitle("IUD Years among Biopsy\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_iud_ct = ggplot(df, aes(as.factor(Ct), as.double(IUDY))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Cytology")+
+  ylab("IUD Years") +
+  ggtitle("IUD Years among Cytology\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_iud_sch = ggplot(df, aes(as.factor(Sch), as.double(IUDY))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Schiller")+
+  ylab("IUD Years") +
+  ggtitle("IUD Years among Schiller\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_iud_hn = ggplot(df, aes(as.factor(Hn), as.double(IUDY))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Hinselmann")+
+  ylab("IUD Years") +
+  ggtitle("IUD Years among Hinselmann\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+layout <- "
+  AABB
+  CCDD
+  "
+
+g_iud_bp + g_iud_ct + g_iud_sch + g_iud_hn + 
+  plot_layout(design = layout)
+```
 
 ## STDs
 
+Sexually transmitted diseases (STDs), or sexually transmitted infections (STIs), are infections that are passed from one person to another through sexual contact. How does STDs relate to cervical cancer? Is it a possible factor?
+
+A mosaic plot between boolean variables STD and biopsy results.
+
+```{r, fig.height = 3, fig.width = 3, fig.align = "center"}
+df$STD = as.integer(df$STD)
+mosaic(STD~Bp, data = df,direction = c("v", "h"),
+       labeling = labeling_border(set_varnames = c(Bp = "Biopsy", 
+                                   STD = "STD")))
+```
+
+We then check if STD number correlates with cervical cancer.
+
+```{r}
+g_std_bp = ggplot(df, aes(as.double(STDN))) +
+  geom_bar(color = "grey50", fill = "lightblue")+
+  facet_wrap(~Bp, scales = 'free')+
+  xlab("STD Number")+
+  ggtitle("STD Number among Biopsy\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+g_std_ct = ggplot(df, aes(as.double(STDN))) +
+  geom_bar(color = "grey50", fill = "lightblue")+
+  facet_wrap(~Ct, scales = 'free')+
+  xlab("STD Number")+
+  ggtitle("STD Number among Cytology\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_std_sch = ggplot(df, aes(as.double(STDN))) +
+  geom_bar(color = "grey50", fill = "lightblue")+
+  facet_wrap(~Sch, scales = 'free')+
+  xlab("STD Number")+
+  ggtitle("STD Number among Schiller\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_std_hn = ggplot(df, aes(as.double(STDN))) +
+  geom_bar(color = "grey50", fill = "lightblue")+
+  facet_wrap(~Hn, scales = 'free')+
+  xlab("STD Number")+
+  ggtitle("STD Number among Hinselmann\n 
+          positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+layout <- "
+  AABB
+  CCDD
+  "
+
+g_std_bp + g_std_ct + g_std_sch + g_std_hn + 
+  plot_layout(design = layout)
+```
+
+We would then look into a collection of different STDs and their correlation with cervical cancers. 
+
+TODO!!!!!!!!!!
 
 
