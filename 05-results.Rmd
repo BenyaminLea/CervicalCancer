@@ -22,6 +22,55 @@ colnames(df) = c("Ag", "Nosp","Fsi","Nop","Sm","SmY","SmPY","HC","HCY",
 ## Age
 
 Many cancer diseases relate with age, that older people have higher risks. Is this consistent for cervical cancer in this data set?
+```{r, echo = FALSE}
+g_ag_bp = ggplot(df, aes(as.factor(Bp), Ag)) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Biopsy")+
+  ylab("Age") +
+  ggtitle("Age among Biopsy\n positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_ag_ct = ggplot(df, aes(as.factor(Ct), Ag)) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Cytology")+
+  ylab("Age") +
+  ggtitle("Age among Cytology\n positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_ag_sch = ggplot(df, aes(as.factor(Sch), Ag)) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Schiller")+
+  ylab("Age") +
+  ggtitle("Age among Schiller\n positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+g_ag_hn = ggplot(df, aes(as.factor(Hn), Ag)) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Hinselmann")+
+  ylab("Age") +
+  ggtitle("Age among Hinselmann\n positive and negative")+
+  theme_grey(14)+
+  theme(plot.title = element_text(size = 10), 
+        axis.title = element_text(size = 10))
+
+layout <- "
+  AABB
+  CCDD
+  "
+
+g_ag_bp + g_ag_ct + g_ag_sch + g_ag_hn + 
+  plot_layout(design = layout)
+```
 
 
 ## Number of Sexual Partners
@@ -29,50 +78,46 @@ Many cancer diseases relate with age, that older people have higher risks. Is th
 Does number of sexual partners relate with cervical cancer? How do the 4 different ways of disease diagnosis show differences?
 
 ```{r, echo = FALSE}
-g_nosp_bp = ggplot(df, aes(as.integer(Nosp))) + 
-  geom_histogram(color = "grey50", 
-                fill = "lightblue",binwidth = 2) + 
-  facet_wrap(~Bp, scales = "free") + 
-  ylab("Count") + 
-  xlab('Number of Sexual Partners')+
-  ggtitle("Number of Sexual Partners among\n 
-          Biopsy positive and negative") +
+g_nosp_bp = ggplot(df, aes(as.factor(Bp), as.integer(Nosp))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Biopsy")+
+  ylab("Number of Sexual Partners") +
+  ggtitle("Number of Sexual Partners among Biopsy\n 
+          positive and negative")+
   theme_grey(14)+
   theme(plot.title = element_text(size = 10), 
         axis.title = element_text(size = 10))
 
-g_nosp_ct = ggplot(df, aes(as.integer(Nosp))) + 
-  geom_histogram(color = "grey50", 
-                fill = "lightblue",binwidth = 2) + 
-  facet_wrap(~Ct, scales = "free") + 
-  ylab("Count") + 
-  xlab('Number of Sexual Partners')+
-  ggtitle("Number of Sexual Partners among\n 
-          Cytology positive and negative") +
+g_nosp_ct = ggplot(df, aes(as.factor(Ct), as.integer(Nosp))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Cytology")+
+  ylab("Number of Sexual Partners") +
+  ggtitle("Number of Sexual Partners among Cytology\n 
+          positive and negative")+
   theme_grey(14)+
   theme(plot.title = element_text(size = 10), 
         axis.title = element_text(size = 10))
 
-g_nosp_sch = ggplot(df, aes(as.integer(Nosp))) + 
-  geom_histogram(color = "grey50", 
-                fill = "lightblue",binwidth = 2) + 
-  facet_wrap(~Sch, scales = "free") + 
-  ylab("Count") + 
-  xlab('Number of Sexual Partners')+
-  ggtitle("Number of Sexual Partners among\n 
-          Schiller positive and negative") +
+g_nosp_sch = ggplot(df, aes(as.factor(Sch), as.integer(Nosp))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Schiller")+
+  ylab("Number of Sexual Partners") +
+  ggtitle("Number of Sexual Partners among Schiller\n 
+          positive and negative")+
   theme_grey(14)+
   theme(plot.title = element_text(size = 10), 
         axis.title = element_text(size = 10))
 
-g_nosp_hn = ggplot(df, aes(as.integer(Nosp))) + 
-  geom_histogram(color = "grey50", 
-                fill = "lightblue",binwidth = 2) + 
-  facet_wrap(~Hn, scales = "free") + 
-  ylab("Count") + 
-  xlab('Number of Sexual Partners')+
-  ggtitle("Number of Sexual Partners among\n 
-          Hinselmann positive and negative") +
+g_nosp_hn = ggplot(df, aes(as.factor(Hn), as.integer(Nosp))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Hinselmann")+
+  ylab("Number of Sexual Partners") +
+  ggtitle("Number of Sexual Partners among Hinselmann\n 
+          positive and negative")+
   theme_grey(14)+
   theme(plot.title = element_text(size = 10), 
         axis.title = element_text(size = 10))
@@ -163,50 +208,47 @@ mosaic(Sm~Bp, data = df,direction = c("v", "h"),
 
 Smoke years relation with cervical cancer.
 ```{r, echo = FALSE}
-g_sm_bp = ggplot(df, aes(as.double(SmY))) + 
-  geom_histogram(color = "grey50", 
-                fill = "lightblue", binwidth = 5) + 
-  facet_wrap(~Bp, scales = "free") + 
-  ylab("Count") + 
-  xlab('Smokes (years)')+
-  ggtitle("Smokes (years) among\n 
-          Biopsy positive and negative") +
+df$SmT = as.double(df$SmY) * as.double(df$SmPY)
+g_sm_bp = ggplot(df, aes(as.factor(Bp), as.double(SmT))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Biopsy")+
+  ylab("Smoking packs total") +
+  ggtitle("Smoking packs total among Biopsy\n 
+          positive and negative")+
   theme_grey(14)+
   theme(plot.title = element_text(size = 10), 
         axis.title = element_text(size = 10))
 
-g_sm_ct = ggplot(df, aes(as.double(SmY))) +
-  geom_histogram(color = "grey50", 
-                fill = "lightblue",binwidth = 5) + 
-  facet_wrap(~Ct, scales = "free") + 
-  ylab("Count") + 
-  xlab('Smokes (years)')+
-  ggtitle("Smokes (years) among\n 
-          Cytology positive and negative") +
+g_sm_ct = ggplot(df, aes(as.factor(Ct), as.double(SmT))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Cytology")+
+  ylab("Smoking packs total") +
+  ggtitle("Smoking packs total among Cytology\n 
+          positive and negative")+
   theme_grey(14)+
   theme(plot.title = element_text(size = 10), 
         axis.title = element_text(size = 10))
 
-g_sm_sch = ggplot(df, aes(as.double(SmY))) + 
-  geom_histogram(color = "grey50", 
-                fill = "lightblue",binwidth = 5) + 
-  facet_wrap(~Sch, scales = "free") + 
-  ylab("Count") + 
-  xlab('Smokes (years)')+
-  ggtitle("Smokes (years) among\n 
-          Schiller positive and negative") +
+g_sm_sch = ggplot(df, aes(as.factor(Sch), as.double(SmT))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Schiller")+
+  ylab("Smoking packs total") +
+  ggtitle("Smoking packs total among Schiller\n 
+          positive and negative")+
   theme_grey(14)+
   theme(plot.title = element_text(size = 10), 
         axis.title = element_text(size = 10))
 
-g_sm_hn = ggplot(df, aes(as.double(SmY))) + 
-  geom_histogram(color = "grey50", 
-                fill = "lightblue",binwidth = 5) + 
-  facet_wrap(~Hn, scales = "free") + 
-  ylab("Count") + 
-  xlab('Smokes (years)')+
-  ggtitle("Smokes (years) among\n 
-          Hinselmann positive and negative") +
+g_sm_hn = ggplot(df, aes(as.factor(Hn), as.double(SmT))) +
+  geom_boxplot() + 
+  coord_flip() +
+  xlab("Hinselmann")+
+  ylab("Smoking packs total") +
+  ggtitle("Smoking packs total among Hinselmann\n 
+          positive and negative")+
   theme_grey(14)+
   theme(plot.title = element_text(size = 10), 
         axis.title = element_text(size = 10))
