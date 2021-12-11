@@ -9,8 +9,6 @@ missing-values-by-column
 missing-value-plots
 using-problem-2-missing-value-function
 results
-interactive-component
-conclusion
 age
 number-of-sexual-partners
 first-sexual-intercourse-age
@@ -19,3 +17,5 @@ smoking
 hormonal-contraceptives
 iud
 stds
+interactive-component
+conclusion
