@@ -13,6 +13,16 @@ varType = as.table(varType)
 varType
 ```
 
+Dx: oncology tests on specific diseases. Test on genes and mutations. 
+
+Hinselmann: a test method for cervical cancer by examining the cells on an instrument called colposcope.
+
+Schiller: a preliminary test for cancer of the uterine cervix in which the cervix is painted with an aqueous solution of iodine and potassium iodide.
+
+Cytology: A cytology test is used to look closely at cells and body fluids.
+
+Biopsy: removes a small amount of tissue to examine under a microscope.
+
 ## Dataset Shape and Observations
 
 Row number: 858
