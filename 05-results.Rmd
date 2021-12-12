@@ -22,6 +22,9 @@ colnames(df) = c("Ag", "Nosp","Fsi","Nop","Sm","SmY","SmPY","HC","HCY",
 ## Age
 
 Many cancer diseases relate with age, that older people have higher risks. Is this consistent for cervical cancer in this data set?
+
+The chance of one's having cervical cancer does not seem have a obvious connection to one's age from the four tests. From the graphs, the age overlapping rate is quite high between the two groups. The test results came out with "0" has more outlines and those test results with "1" is more concentrated around the whole IQR, this might results from the fact that the 1/0 ratio in out data is very small. Since, every median line of "1" box looks close to the median line of "0" box or lie outside of the whole IQR of box "0", there is unlikely to have a difference between the age factor and cervical cancer. From the graphs, we can also observe that the median of "1" is slightly higher than "0", meaning that the median of the group was tested with cervical cancer has a slightly higher age than those who do not have the disease.
+
 ```{r, echo = FALSE}
 g_ag_bp = ggplot(df, aes(as.factor(Bp), Ag)) +
   geom_boxplot() + 
@@ -76,6 +79,8 @@ g_ag_bp + g_ag_ct + g_ag_sch + g_ag_hn +
 ## Number of Sexual Partners
 
 Does number of sexual partners relate with cervical cancer? How do the 4 different ways of disease diagnosis show differences?
+
+From the graphs, the Biopsy results and the Schiller results are very similar. However in Cytology results, the "0" box lies outside the "1" box, indicating there is likely to be a difference between the two groups. In all 3 tests, the median line of the "1" box seems close to the median line of "0" box except the Cytology graph. Their results and indications are quite consistent with each other, implying very little differences between the two groups.
 
 ```{r, echo = FALSE}
 g_nosp_bp = ggplot(df, aes(as.factor(Bp), as.integer(Nosp))) +
@@ -134,6 +139,9 @@ g_nosp_bp + g_nosp_ct + g_nosp_sch + g_nosp_hn +
 ## First sexual intercourse (age)
 
 Does first sexual intercourse time correlate with cervical cancer?
+
+Demonstrated by the graphs, in all 4 tests, the the median line of the "1" box seems to overlap with the median line of "0" box. Additionally, the two boxes in each graph has very high overlapping area, and they are very similar. This indicates that there is very unlikely to be a difference between the two groups, namely, very little connection between the factor of age of first sex intercourse and the chance of getting cervical cancer.
+
 ```{r}
 g_fsi_bp = ggplot(df, aes(as.factor(Bp), as.integer(Fsi))) +
   geom_boxplot() + 
@@ -193,6 +201,7 @@ g_fsi_bp + g_fsi_ct + g_fsi_sch + g_fsi_hn +
 
 Pregnancy and giving birth affects cervical tissue in many ways. Would number of pregnancy relate to cervical cancer chances?
 
+The bar plots shown in the following four tests all present a right-skewed trend with fewer people having high number of pregnancies. Both groups have high concentration of 1 to 3 number of pregnancies. The distributions for all four graphs are similar, however, it is clearly that the sample size of the group "1" is much smaller than the group "0" with a magnitude difference. 
 ```{r, echo = FALSE}
 g_nop_bp = ggplot(df, aes(as.integer(Nop))) + 
   geom_histogram(color = "grey50", 
@@ -255,7 +264,7 @@ g_nop_bp + g_nop_ct + g_nop_sch + g_nop_hn +
 
 Smoking is related to many diseases and is seen as one of the most common factors to severe diseases including lung cancer and hear diseases. Does smoking relates to Cervical Cancer as well?
 
-A mosaic plot between boolean variables smoking and biopsy results.
+In the following part, we present a mosaic plot between boolean variables of smoking and biopsy results. In Biopsy test, the number of people who were diagnosed with cervical cancer or group "1" is roughly 10 times of that of those who were not, or the group "0" data. People who do not smoke is much more than people who smoke in this survey. In the group "1", the portion of people who smoke is slightly higher than of the the groups "0", but both are around 10 percent of the entire group.
 
 ```{r, fig.height = 3, fig.width = 3, fig.align = "center"}
 library(vcd)
@@ -265,7 +274,7 @@ mosaic(Sm~Bp, data = df,direction = c("v", "h"),
                                    Sm = "Smoke")))
 ```
 
-Smoke years times Smoke packs per year to calculate total packs of cigarettes smoked. Investigate the relation with cervical cancer.
+We calculate total packs of cigarettes smoked by using the equation where smoke years times Smoke packs per year. Presented by the graphs, we can clearly see that the most of the people smoke 0 packs of cigarettes since the IQR area of all the graphs are located at origin. And the people who were not diagnoised with cervical cancer or the group "0" has more outlines than those who were or the group "1". There is not clear difference between the two groups, indicating there is little relation between the factor of number of total packs of cigarettes smoked and the chance of getting cervical cancer. 
 ```{r, echo = FALSE}
 df$SmT = as.double(df$SmY) * as.double(df$SmPY)
 g_sm_bp = ggplot(df, aes(as.factor(Bp), as.double(SmT))) +
@@ -325,8 +334,7 @@ g_sm_bp + g_sm_ct + g_sm_sch + g_sm_hn +
 
 Hormonal Contraceptives are birth control methods, considered as safe and reliable ways to prevent pregnancy for most people. Would Hormonal Contraceptives be a factor for cervical cancer?
 
-A mosaic plot between boolean variables Hormonal Contraceptives and biopsy results.
-
+In the following graph, we have a mosaic plot between boolean variables Hormonal Contraceptives in biopsy results. In Biopsy test, the number of people who were diagnosed with cervical cancer or group "1" is roughly 10 times of that of those who were not, or the group "0" data. In the group "1", the portion of people who smoke is slightly higher than the the groups "0", but both are around 60 percent of the entire group.
 ```{r, fig.height = 3, fig.width = 3, fig.align = "center"}
 df$HC = as.integer(df$HC)
 mosaic(HC~Bp, data = df,direction = c("v", "h"),
@@ -334,7 +342,7 @@ mosaic(HC~Bp, data = df,direction = c("v", "h"),
                                    HC = "Hormonal Contraceptives")))
 ```
 
-We investigate further on number of years of using Hormonal Contraceptives and its relation with cervical cancer.
+We investigate further on number of years of using Hormonal Contraceptives and its relation with cervical cancer. Shown by the graphs, in theses tests, the the median line of the "1" box seems to overlap with or very close to the median line of "0" box, except for Cytology test having a smaller median in label "1" box. Additionally, the two boxes in each graph has very high overlapping area, and they are very similar. This indicates that there is very unlikely to be a difference between the two groups, namely, very little connection between the factor of years of using Hormonal Contraceptives and the chance of getting cervical cancer.
 
 ```{r, echo = FALSE}
 g_hc_bp = ggplot(df, aes(as.factor(Bp), as.double(HCY))) +
@@ -394,6 +402,8 @@ g_hc_bp + g_hc_ct + g_hc_sch + g_hc_hn +
 
 An IUD is a tiny device that's put into one's uterus to prevent pregnancy. It's long-term, reversible, and one of the most effective birth control methods. However, it is an extremely painful process and would make periods become heavier, more painful and longer. Question here would be if IUD relates with cervical cancer.
 
+In the following graph, we have a mosaic plot between boolean variables Hormonal Contraceptives in biopsy results. In Biopsy test, the number of people who were diagnosed with cervical cancer or group "1" is roughly 10 times of that of those who were not, or the group "0" data. In the group "1", the portion of people who had IUD test seems to be higher than the the groups "0", but both are around 10 to 20 percent of the entire group.
+
 A mosaic plot between boolean variables IUD and biopsy results.
 
 ```{r, fig.height = 3, fig.width = 3, fig.align = "center"}
@@ -403,7 +413,7 @@ mosaic(IUD~Bp, data = df,direction = c("v", "h"),
                                    IUD = "IUD")))
 ```
 
-We investigate further on number of years of using IUD and its relation with cervical cancer.
+We investigate further on number of years of using IUD and its relation with cervical cancer. Demonstrated by the graphs, we can conclude that the most of the people spend 0 years using IUD since the IQR area of all the graphs are located at origin. And the people who were not diagnosed with cervical cancer or the group "0" has more outlines than those who were or the group "1". There is not clear difference between the two groups, indicating there is little relation between the factor of number of years of using IUD and the chance of getting cervical cancer. 
 
 ```{r, echo = FALSE}
 g_iud_bp = ggplot(df, aes(as.factor(Bp), as.double(IUDY))) +
@@ -463,7 +473,8 @@ g_iud_bp + g_iud_ct + g_iud_sch + g_iud_hn +
 
 Sexually transmitted diseases (STDs), or sexually transmitted infections (STIs), are infections that are passed from one person to another through sexual contact. How does STDs relate to cervical cancer? Is it a possible factor?
 
-A mosaic plot between boolean variables STD and biopsy results.
+
+
 
 ```{r, fig.height = 3, fig.width = 3, fig.align = "center"}
 df$STD = as.integer(df$STD)
@@ -472,7 +483,7 @@ mosaic(STD~Bp, data = df,direction = c("v", "h"),
                                    STD = "STD")))
 ```
 
-We then check if STD number correlates with cervical cancer.
+In the following graphs, we check if STD number correlates with cervical cancer by presenting a mosaic plot between boolean variables STD and biopsy results. The bar plots shown in the following four tests all present a right-skewed trend with both groups have most people clustered at origin. The distributions for all four graphs are similar, however, it is clearly that the sample size of the group "1" is much smaller than the group "0" with a magnitude difference. Since the distributions of both groups are ver similar, this indicates little differences between, namely, there is little connection between the STD number and the chance of getting cervical cancer.
 
 ```{r}
 g_std_bp = ggplot(df, aes(as.double(STDN))) +
