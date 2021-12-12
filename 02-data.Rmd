@@ -17,6 +17,6 @@ of the questions because of privacy concerns, hence missing values are contained
 ```{r}
 library("knitr")
 
-df <- read.csv(file = '../risk_factors_cervical_cancer.csv')
+df <- read.csv(file = 'risk_factors_cervical_cancer.csv')
 kable(df[1:5, ],  caption = "Risk Factors Data Set", col.names = gsub("[.]", " ", names(df)), align = "c")
 ```

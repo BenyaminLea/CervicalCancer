@@ -24,7 +24,7 @@
 <meta name="author" content="Jiawen Zhou, Lea Benyamin and Yuxin Cui" />
 
 
-<meta name="date" content="2021-12-11" />
+<meta name="date" content="2021-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -121,6 +121,289 @@
             <section class="normal" id="section-">
 <div id="data-sources" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Data sources</h1>
+<p>The primary data source of this project is Cervical cancer (Risk Factors) Data
+Set from UCI Machine Learning Repository. It gathered information including
+demographic information, habits, and historic medical records of 858 patients at
+the ‘Hospital Universitario de Caracas’ in Caracas, Venezuela. And the data is
+donated on 2017-03-03.</p>
+<p>There are 36 features in the data set, including non-disease behaviors, like
+smoking, and diseases conditions, like HIV, HPV. There are 4 target variables
+among the 36, which determines whether the patient has cervical cancer.</p>
+<p>The issue with this dataset is that several patients decided not to answer some
+of the questions because of privacy concerns, hence missing values are contained.</p>
+<table style="width:100%;">
+<caption><span id="tab:unnamed-chunk-3">Table 2.1: </span>Risk Factors Data Set</caption>
+<colgroup>
+<col width="0%" />
+<col width="4%" />
+<col width="4%" />
+<col width="3%" />
+<col width="1%" />
+<col width="2%" />
+<col width="3%" />
+<col width="3%" />
+<col width="5%" />
+<col width="0%" />
+<col width="2%" />
+<col width="0%" />
+<col width="2%" />
+<col width="3%" />
+<col width="4%" />
+<col width="4%" />
+<col width="5%" />
+<col width="2%" />
+<col width="5%" />
+<col width="3%" />
+<col width="4%" />
+<col width="1%" />
+<col width="1%" />
+<col width="2%" />
+<col width="1%" />
+<col width="4%" />
+<col width="5%" />
+<col width="5%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="0%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+<col width="1%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Age</th>
+<th align="center">Number of sexual partners</th>
+<th align="center">First sexual intercourse</th>
+<th align="center">Num of pregnancies</th>
+<th align="center">Smokes</th>
+<th align="center">Smokes years</th>
+<th align="center">Smokes packs year</th>
+<th align="center">Hormonal Contraceptives</th>
+<th align="center">Hormonal Contraceptives years</th>
+<th align="center">IUD</th>
+<th align="center">IUD years</th>
+<th align="center">STDs</th>
+<th align="center">STDs number</th>
+<th align="center">STDs condylomatosis</th>
+<th align="center">STDs cervical condylomatosis</th>
+<th align="center">STDs vaginal condylomatosis</th>
+<th align="center">STDs vulvo perineal condylomatosis</th>
+<th align="center">STDs syphilis</th>
+<th align="center">STDs pelvic inflammatory disease</th>
+<th align="center">STDs genital herpes</th>
+<th align="center">STDs molluscum contagiosum</th>
+<th align="center">STDs AIDS</th>
+<th align="center">STDs HIV</th>
+<th align="center">STDs Hepatitis B</th>
+<th align="center">STDs HPV</th>
+<th align="center">STDs Number of diagnosis</th>
+<th align="center">STDs Time since first diagnosis</th>
+<th align="center">STDs Time since last diagnosis</th>
+<th align="center">Dx Cancer</th>
+<th align="center">Dx CIN</th>
+<th align="center">Dx HPV</th>
+<th align="center">Dx</th>
+<th align="center">Hinselmann</th>
+<th align="center">Schiller</th>
+<th align="center">Citology</th>
+<th align="center">Biopsy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">18</td>
+<td align="center">4.0</td>
+<td align="center">15.0</td>
+<td align="center">1.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0</td>
+<td align="center">?</td>
+<td align="center">?</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">15</td>
+<td align="center">1.0</td>
+<td align="center">14.0</td>
+<td align="center">1.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0</td>
+<td align="center">?</td>
+<td align="center">?</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">34</td>
+<td align="center">1.0</td>
+<td align="center">?</td>
+<td align="center">1.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0</td>
+<td align="center">?</td>
+<td align="center">?</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">52</td>
+<td align="center">5.0</td>
+<td align="center">16.0</td>
+<td align="center">4.0</td>
+<td align="center">1.0</td>
+<td align="center">37.0</td>
+<td align="center">37.0</td>
+<td align="center">1.0</td>
+<td align="center">3.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0</td>
+<td align="center">?</td>
+<td align="center">?</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">46</td>
+<td align="center">3.0</td>
+<td align="center">21.0</td>
+<td align="center">4.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">1.0</td>
+<td align="center">15.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0.0</td>
+<td align="center">0</td>
+<td align="center">?</td>
+<td align="center">?</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
 
 </div>
             </section>
