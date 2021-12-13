@@ -1,0 +1,137 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Cervical Cancer Cases in the US in 2018</title>
+    <style>
+        
+        body {margin: 10px}
+        
+        svg {width: 100%;}
+        
+        .tooltip {
+            top: 100px;
+            left: 100px;
+            border-radius: 5px;
+            border: 2px solid black;
+            background: #333;
+            opacity: .9;
+            color: white;
+            padding: 10px;
+            font-size: 2.25vmin;
+            line-height: 24pt;
+            font-weight: lighter;
+            visibility: visible;
+            width: 150px;
+        }
+        
+        path {
+          fill: #fff;
+          stroke: #000;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <h1>Cervical Cancer Cases in the US in 2018</h1>
+    <h3> Hover to get the stats by states</h3>
+    <svg></svg>
+    <i>States in black are states where the data is unknown</i>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    <script type="text/javascript">
+    let width = 800;
+    let height = 500;
+    
+    let path = d3.geoPath()              
+
+    let svg = d3.select("svg")
+			.attr("width", width)
+			.attr("height", height);
+    		
+    let tooltip = d3.select("body")
+        .append("div")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("visibility", "hidden").attr("class", "tooltip");
+        
+   svg.append("g")
+        .attr("class", "legend")
+        .attr("transform",
+            width > 768 ?
+            "translate(" + (width - 25) + ",100)" :
+            "translate(" + (width / 2 - 100) + "," + (height - 120) + ")"
+        );
+        
+    let quantize = d3.scaleQuantize()
+      .domain([ 4.3, 10.8 ])
+      .range([ "#D2B4DE", "#BB8FCE", "#A569BD", "#8E44AD "]);
+    
+    let legend = d3.legendColor()
+      .labelFormat(d3.format(".1f"))
+      .title('Rate per 100 000 inhabitants')
+      .scale(quantize);
+    
+    svg.select(".legend")
+      .call(legend);
+
+    function plot(json, data){
+            const state_dic = {}
+            for (let i = 0; i < data.length; i++) {
+        	     state_dic[data[i].Area] = {
+        	       case_count : data[i]["Case Count"],
+          	     pop : data[i].Population,
+          	     ratio : data[i]["Case Count"]/data[i].Population*100000
+        	     }
+             }
+      
+          svg
+          .append('g')
+          .attr("class", "map")
+          .selectAll('path')
+          .data(topojson.feature(json, json.objects.states).features)
+          .enter()
+          .append('path')
+          .attr("transform", "scale(0.8)")
+          .attr('d', path)
+          .style("fill", (d) => {
+                          if (state_dic[d.properties.name].ratio) return quantize(state_dic[d.properties.name].ratio)
+                          else return 'black'
+                      })
+          .on("mouseover", (event,d) => updateTooltip(event,d))
+          .on("mouseout", hideTooltip)
+      
+          function hideTooltip() {
+              return tooltip.style("visibility", "hidden");
+          }
+          function updateTooltip(event,d) {
+          	  const tooltipWidth = parseInt(tooltip.style('width'));
+              const tooltipHeight = parseInt(tooltip.style('height'));
+              const x_hover = (event.pageX > document.body.clientWidth / 2) ? tooltipWidth + 30 : -30;
+              const y_hover = (document.body.clientHeight - event.pageY < (tooltipHeight + 4)) ? event.pageY - (tooltipHeight + 4) : event.pageY - tooltipHeight / 2;
+              const data = Math.round(state_dic[d.properties.name].ratio * 10) / 10;
+              tooltip.html(`${state_dic[d.properties.name].case_count} cases of Cervical Cancer for ${state_dic[d.properties.name].pop} inhabitants in ${d.properties.name} in 2018 (${data} cases per 100 000 inhabitants)`);
+              tooltip.style("visibility", "visible");
+              tooltip.style("top", y_hover + "px");
+              tooltip.style("left", (event.pageX - x_hover) + "px");
+              
+              return tooltip;
+          }
+      }
+  
+  
+       const promises = [];
+        promises.push(d3.json("https://d3js.org/us-10m.v2.json"))
+        promises.push(d3.csv("https://raw.githubusercontent.com/BenyaminLea/CervicalCancer/main/resources/USCSOverviewMap.csv"))
+        Promise.all(promises).then(function(values) {
+                plot(values[0],values[1])
+        });
+</script>
+
+</body>
+
+</html>

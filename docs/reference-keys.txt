@@ -19,6 +19,9 @@ hormonal-contraceptives
 iud
 stds
 interactive-component
+interactive-component-1
+link-to-the-interactive-map
+description
 conclusion
 limitations
 future-directions-and-lessons-learnt

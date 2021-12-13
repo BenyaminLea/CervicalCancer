@@ -24,7 +24,7 @@
 <meta name="author" content="Jiawen Zhou, Lea Benyamin and Yuxin Cui" />
 
 
-<meta name="date" content="2021-12-12" />
+<meta name="date" content="2021-12-13" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -99,10 +99,15 @@
 <li class="chapter" data-level="5.8" data-path="results.html"><a href="results.html#stds"><i class="fa fa-check"></i><b>5.8</b> STDs</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a>
+<li class="chapter" data-level="7" data-path="interactive-component-1.html"><a href="interactive-component-1.html"><i class="fa fa-check"></i><b>7</b> Interactive component</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="conclusion.html"><a href="conclusion.html#limitations"><i class="fa fa-check"></i><b>7.1</b> Limitations</a></li>
-<li class="chapter" data-level="7.2" data-path="conclusion.html"><a href="conclusion.html#future-directions-and-lessons-learnt"><i class="fa fa-check"></i><b>7.2</b> Future Directions and Lessons Learnt</a></li>
+<li class="chapter" data-level="7.1" data-path="interactive-component-1.html"><a href="interactive-component-1.html#link-to-the-interactive-map"><i class="fa fa-check"></i><b>7.1</b> Link to the interactive map</a></li>
+<li class="chapter" data-level="7.2" data-path="interactive-component-1.html"><a href="interactive-component-1.html#description"><i class="fa fa-check"></i><b>7.2</b> Description</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>8</b> Conclusion</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="conclusion.html"><a href="conclusion.html#limitations"><i class="fa fa-check"></i><b>8.1</b> Limitations</a></li>
+<li class="chapter" data-level="8.2" data-path="conclusion.html"><a href="conclusion.html#future-directions-and-lessons-learnt"><i class="fa fa-check"></i><b>8.2</b> Future Directions and Lessons Learnt</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -128,7 +133,7 @@
 <div id="age" class="section level2" number="5.1">
 <h2><span class="header-section-number">5.1</span> Age</h2>
 <p>Many cancer diseases relate with age, that older people have higher risks. Is this consistent for cervical cancer in this data set?</p>
-<p>The chance of one’s having cervical cancer does not seem to have an obvious connection to one’s age from the four tests. From the graphs, the age overlapping rate is quite high between the two groups. The test results that came out with “0” have more outlines and those test results with “1” are more concentrated around the whole IQR, this might result from the fact that the 1/0 ratio in our data is very small. Since, every median line of “1” box looks close to the median line of “0” box or lie outside of the whole IQR of box “0”, there is unlikely to have a difference between the age factor and cervical cancer. From the graphs, we can also observe that the median of “1” is slightly higher than “0”, meaning that the median of the group was tested with cervical cancer has a slightly higher age than those who do not have the disease.</p>
+<p>The chance of one’s having cervical cancer does not seem to have an obvious connection to one’s age from the four tests. From the graphs, the age overlapping rate is quite high between the two groups. The test results that came out with “0” have more outliers and those test results with “1” are more concentrated around the whole IQR, although this might result from the fact that the 1/0 ratio in our data is very small. Since every median line of “1” box looks close to the median line of “0” box or lie outside of the whole IQR of box “0”, there is unlikely to have a difference between the age factor and cervical cancer. From the graphs, we can also observe that the median of “1” is slightly higher than “0”, meaning that the median of the group was tested with cervical cancer has a slightly higher age than those who do not have the disease.</p>
 <p>There are indeed differences between the four different diagnosis method and that results in the differences in the plot. The age range of patients diagnosed with cervical cancer with cytology and Hinselmann is less than that of patients without cervical cancer. However, with biopsy and Schiller, the age range between the two groups are similar.</p>
 <p>We also see lots of outliers who are the elder patients, which could be a result of many patients come to hospital when they are old, when their body functions badly, while younger people will not go to doctors until urgent symptoms.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
@@ -184,15 +189,15 @@
 <p>In the following graphs, we check if STD number correlates with cervical cancer by presenting a mosaic plot between boolean variables STD and biopsy results. The bar plots shown in the following four tests all present a right-skewed trend with both groups have most people clustered at origin. The distributions for all four graphs are similar, however, it is clearly that the sample size of the group “1” is much smaller than the group “0” with a magnitude difference. Since the distributions of both groups are ver similar, this indicates little differences between, namely, there is little connection between the STD number and the chance of getting cervical cancer.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <p>We would then look into a collection of different STDs and their correlation with cervical cancers.</p>
-<p>Due to data scarcity, most of the specific STDs does not have sufficient cases for us to compare the results. What we have in the below plot is a bar plot on percentage comparison of patient with cervical cancer from group STD0, who are diagnosed with no the specific STD, and group STD1, who have that specific STD. We see an increase in percent of cervical caner in group STD1, which could be the evidence for the claim that condylomatosis,vulvo-perineal condylomatosis and HIV are diseases relate to cervical cancer that would bring higher risks.</p>
+<p>Due to data scarcity, most of the specific STDs does not have sufficient cases for us to compare the results. What we have in the plot below is a bar plot on percentage comparison of patient with cervical cancer from group STD0, who are diagnosed with no the specific STD, and group STD1, who have that specific STD. We see an increase in percent of cervical caner in group STD1, which could be the evidence for the claim that condylomatosis,vulvo-perineal condylomatosis and HIV are diseases relate to cervical cancer that would bring higher risks.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p>We will also check STD Number of Diagnosis, to find if it is related with cervical cancer.</p>
-<p>In the mosaic plot below, we observe that for cervical cancer patients, about 20% of them have been diagonsed 1 times or more. And for non cervical cancer group, it has about 2% diagnosed 1 times or more. This might hint the claim that number of STD diagnosis correlates with cervical cancer in some ways.</p>
+<p>In the mosaic plot below, we observe that for cervical cancer patients, about 20% of them have been diagnosed 1 times or more. And for non cervical cancer group, it has about 2% diagnosed 1 time or more. This might hint the claim that number of STD diagnosis correlates with cervical cancer in some ways.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-30-1.png" width="288" style="display: block; margin: auto;" /></p>
-<p>Since number of diagnosis of STD seems to relate to cervical cancer, we keep test on first time diagnosis (time till now) of STD, last time diagnosis (time till now) and their relation to cervical cancer.</p>
-<p>In the boxplot below, we observe that in biopsy and Hinselmann tests, group1, who are cervical cancer patients, have later first diagnosis. However, in cytology and Schiller tests, group1 have earlier first diagnosis. There are outliers in both groups with high time period value, meaning that the first diagnosis time for these patients are much earlier. So with conflicting results, we cannot decide on whether first time diagnosis of STD relates to cervical cancer.</p>
+<p>Since number of diagnosis of STD seems to relate to cervical cancer, we keep test on first time diagnosis (time till now) of STD, last time diagnosis (time till now) and their relations to cervical cancer.</p>
+<p>In the box plot below, we observe that in biopsy and Hinselmann tests, group “1”, who are cervical cancer patients, has later first diagnosis. However, in cytology and Schiller tests, group “1” has earlier first diagnosis. There are outliers in both groups with high time period value, meaning that the first diagnosis time for these patients are much earlier. Given conflicting results, we cannot decide on whether first time diagnosis of STD relates to cervical cancer.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
-<p>In the boxplot below, we observe that in biopsy and Hinselmann tests, group1, who are cervical cancer patients, have more recent last diagnosis. However, in cytology and Schiller tests, group1 have less recent last diagnosis. There are outliers in both groups with high time period value, meaning that the last diagnosis time for these patients are much earlier. So with conflicting results, we cannot decide on whether last time diagnosis of STD relates to cervical cancer.</p>
+<p>In the box plot below, we observe that in biopsy and Hinselmann tests, group1, who are cervical cancer patients, have more recent last diagnosis. However, in cytology and Schiller tests, group “1” have less recent last diagnosis. There are outliers in both groups with high time period value, meaning that the last diagnosis time for these patients are much earlier. So with conflicting results, we cannot decide on whether last time diagnosis of STD relates to cervical cancer.</p>
 <p><img src="finalproj_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 
 </div>
