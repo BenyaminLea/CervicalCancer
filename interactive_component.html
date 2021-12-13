@@ -4,150 +4,130 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>US Presidential Election Results</title>
+    <title>Cervical Cancer Cases in the US in 2018</title>
     <style>
-        .tract {
-            stroke: white; stroke-width: 0.15px; pointer-events: all;
-        }
         
-        .tract:hover {
-            stroke: orange; pointer-events: all;
-        }
-        
-        .tract-border {
-            fill: none; stroke-width: 0.15px; pointer-events: none;
-        }
-        
-        @media (max-width: 800px) {
-            .label {
-                transform: rotate(-45deg) translate(-10px, 25px);
-            }
-        }
-        
-        .tract-border-state {
-            fill: none;
-            stroke: black;
-            stroke-width: 0.7px;
-            pointer-events: none;
-        }
-        
-        .legend {
-            font-family: sans-serif; font-size: 10pt;
-        }
-        
-        .legendTitle {
-            font-weight: bold; font-size: 11pt;
-        }
-        
-        .background {fill: #f6f7ed;}
-        
-        body {background: #f6f7ed;}
-        
-        .bar {
-            font-family: sans-serif; font-size: 9pt;
-        }
-        
-        #cityLegend {
-            font-family: sans-serif; text-anchor: middle;
-        }
-        
-        #details .background {
-            fill: #f6f7ed; fill-opacity: 0.7;
-        }
+        body {margin: 10px}
         
         svg {width: 100%;}
         
         .tooltip {
             top: 100px;
             left: 100px;
-            -moz-border-radius: 5px;
             border-radius: 5px;
             border: 2px solid black;
             background: #333;
             opacity: .9;
             color: white;
             padding: 10px;
-            min-width: 375px;
-            min-width: 36.75vmin;
             font-size: 2.25vmin;
             line-height: 24pt;
             font-weight: lighter;
             visibility: visible;
+            width: 150px;
         }
     </style>
 </head>
 
 <body>
+    <h1>Cervical Cancer Cases in the US in 2018</h1>
+    <div> Hover to get the stats by states</div>
+    <svg></svg>
+    <i>States in black are states where the data is unknown</i>
     <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.13.0/d3-legend.js"></script>
     <script type="text/javascript">
-    var width = 960;
-    var height = 500;
-
-    var projection = d3.geo.albersUsa()
+    let width = 960;
+    let height = 500;
+    
+    let projection = d3.geo.albersUsa()
 				   .translate([width/2, height/2]) 
 				   .scale([1000]);       
         
-    var path = d3.geo.path()              
+    let path = d3.geo.path()              
 		  	 .projection(projection);
 		  	 
-    var svg = d3.select("body")
-			.append("svg")
+    let svg = d3.select("svg")
 			.attr("width", width)
 			.attr("height", height);
-			
-    var div = d3.select("body")
-		    .append("div")   
-    		.attr("class", "tooltip")               
-    		.style("opacity", 0);
-    var color = d3.scale.linear()
-			  .domain([0, 11])
-        .range(["white", "pink"])
+    		
+    let tooltip = d3.select("body")
+        .append("div")
+        .style("position", "absolute")
+        .style("z-index", "10")
+        .style("visibility", "hidden").attr("class", "tooltip");
+    
+   svg.append("g")
+        .attr("class", "legend")
+        .attr("transform",
+            width > 768 ?
+            "translate(" + (width - 100) + ",100)" :
+            "translate(" + (width / 2 - 100) + "," + (height - 120) + ")"
+        );
+        
+    let quantize = d3.scale.quantize()
+      .domain([ 4.3, 10.8 ])
+      .range([ "#D2B4DE", "#BB8FCE", "#A569BD", "#8E44AD "]);
+    
+    let legend = d3.legend.color()
+      .labelFormat(d3.format(".1f"))
+      .title('Rate per 100 000 inhabitants')
+      .scale(quantize);
+    
+    svg.select(".legend")
+    .call(legend);
 
     d3.json("https://raw.githubusercontent.com/PublicaMundi/MappingAPI/master/data/geojson/us-states.json", function(json) {
-    d3.csv("https://raw.githubusercontent.com/BenyaminLea/CervicalCancer/main/resources/USCSOverviewMap.csv", function(data) {
-   for (var i = 0; i < data.length; i++) {
-	    var dataState = data[i].Area;
-	    var dataValue = data[i]["Case Count"];
-	    var dataPop = data[i].Population;
-	    for (var j = 0; j < json.features.length; j++)  {
-		    var jsonState = json.features[j].properties.name;
-        if (dataState == jsonState) {
-		      json.features[j].properties.population = dataPop;
-		      json.features[j].properties.case_count = dataValue; 
-      		break;
-        }
-	    }
-   }
+      d3.csv("https://raw.githubusercontent.com/BenyaminLea/CervicalCancer/main/resources/USCSOverviewMap.csv", function(data) {
+       for (let i = 0; i < data.length; i++) {
+    	    const dataState = data[i].Area;
+    	    const dataValue = data[i]["Case Count"];
+    	    const dataPop = data[i].Population;
+    	    for (let j = 0; j < json.features.length; j++)  {
+    		    const jsonState = json.features[j].properties.name;
+            if (dataState == jsonState) {
+    		      json.features[j].properties.population = dataPop;
+    		      json.features[j].properties.case_count = dataValue; 
+          		break;
+            }
+    	    }
+       }
        svg.selectAll("path")
-    	.data(json.features)
-    	.enter()
-    	.append("path")
-    	.attr("d", path)
-    	.style("stroke", "#fff")
-    	.style("stroke-width", "1")
-    	.style("fill", function(d) {
-        	var value = d.properties.case_count;
-        	var pop = d.properties.population;
-        	return color(value/pop*100000);
-      })
-      .on("mouseover", function(d) {      
-      	div.transition()        
-        	   .duration(200)      
-             .style("opacity", .9);      
-             div.text(`${d.properties.case_count} cases of Cervical Cancer for ${d.properties.population} inhabitants in ${d.properties.name} in 2018`)
-             .style("left", (d3.event.pageX) + "px")     
-             .style("top", (d3.event.pageY - 28) + "px");    
-    	})   
-      .on("mouseout", function(d) {       
-          div.transition()        
-             .duration(500)      
-             .style("opacity", 0);   
-      });
-	})
+        	.data(json.features)
+        	.enter()
+        	.append("path")
+        	.attr("d", path)
+        	.style("stroke", "#fff")
+        	.style("stroke-width", "1")
+        	.style("fill", function(d) {
+            	const value = d.properties.case_count;
+            	const pop = d.properties.population;
+            	return quantize(value/pop*100000);
+          })
+          .on("mouseover", (d) => updateTooltip(event,d))
+          .on("mouseout", hideTooltip)
+    	})
 })
 
-	
-    </script>
+    function hideTooltip() {
+        return tooltip.style("visibility", "hidden");
+    }
+     function updateTooltip(event,d) {
+    	  const tooltipWidth = parseInt(tooltip.style('width'));
+        const tooltipHeight = parseInt(tooltip.style('height'));
+        const x_hover = (event.pageX > document.body.clientWidth / 2) ? tooltipWidth + 30 : -30;
+        const y_hover = (document.body.clientHeight - event.pageY < (tooltipHeight + 4)) ? event.pageY - (tooltipHeight + 4) : event.pageY - tooltipHeight / 2;
+    	  const value = d.properties.case_count;
+        const pop = d.properties.population;
+        const data = Math.round(value/pop*100000 * 10) / 10;
+        tooltip.html(`${d.properties.case_count} cases of Cervical Cancer for ${d.properties.population} inhabitants in ${d.properties.name} in 2018 (${data} cases per 100 000 inhabitants)`);
+        tooltip.style("visibility", "visible");
+        tooltip.style("top", y_hover + "px");
+        tooltip.style("left", (event.pageX - x_hover) + "px");
+        
+        return tooltip;
+    }
+</script>
 
 </body>
 
