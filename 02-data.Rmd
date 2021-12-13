@@ -1,18 +1,11 @@
 # Data sources
 
-The primary data source of this project is Cervical cancer (Risk Factors) Data 
-Set from UCI Machine Learning Repository. It gathered information including 
-demographic information, habits, and historic medical records of 858 patients at 
- the ‘Hospital Universitario de Caracas’ in Caracas, Venezuela. And the data is 
-donated on 2017-03-03. 
+The primary data source of this project is Cervical cancer (Risk Factors) Data Set from UCI Machine Learning Repository. It gathered information including 
+demographic information, habits, and historic medical records of 858 patients at the ‘Hospital Universitario de Caracas’ in Caracas, Venezuela. And the data is donated on 2017-03-03. 
 
-There are 36 features in the data set, including non-disease behaviors, like 
-smoking, and diseases conditions, like HIV, HPV. There are 4 target variables 
-among the 36, which determines whether the patient has cervical cancer.
+There are 36 features in the data set, including non-disease behaviors, like smoking, and diseases conditions, like HIV, HPV. There are 4 target variables among the 36, which determines whether the patient has cervical cancer.
 
-The issue with this dataset is that several patients decided not to answer some 
-of the questions because of privacy concerns, hence missing values are contained. 
-
+The issue with this data set is that several patients decided not to answer some of the questions because of privacy concerns, hence missing values are contained. Additionally, the sample ratio of label "1", people are diagnosed with cervical cancer, to label "0", people are not diagnosed with cervical cancer, is quite small, indicating an unbalanced data set.
 
 ```{r}
 library("knitr")
