@@ -1,3 +1,15 @@
 # Interactive component
 
 
+# Interactive component
+
+## Link to the interactive map
+Click [here](https://vizhub.com/BenyaminLea/6b9ce5dd8942471d9a358dc1ae61d992?edit=files&file=index.html&mode=full) or copy the url: https://vizhub.com/BenyaminLea/6b9ce5dd8942471d9a358dc1ae61d992?edit=files&file=index.html&mode=full
+
+## Descriptions
+
+The interactive part of our analysis was built with D3 version 6, which the code has been uploaded to [vizhub.com](vizhub.com). You can also find code [here](https://github.com/BenyaminLea/CervicalCancer/blob/main/interactive_component_d3_v6.html) in our github repo. 
+This map shows the number of cervical cancer by states in 2018 in the US. 
+We used data from the CDC (Centers for Disease Control and Prevention). You can find the data [here](https://github.com/BenyaminLea/CervicalCancer/blob/main/resources/USCSOverviewMap.csv). It's a different data set than the one used for the previous parts, this one gives a spatial point of view.
+
+
