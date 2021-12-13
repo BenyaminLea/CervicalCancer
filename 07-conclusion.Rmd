@@ -1,2 +1,19 @@
 # Conclusion
 
+In a group, we analyzed, visualized, and presented the data on cervical cancer and possible factors. We would like to conclude our works and reflect on our limitations.
+
+## Limitations
+
+The data has a poor ratio on cervical cancer group and non-cervical cancer group, which makes our analysis difficult sometimes to determine if there are statistical correlations between variables.
+
+There are 4 target variables, which end up with conflicting results on the same variable. The 4 different test methods do use distinct devices and procedures to test positive for cervical cancer and would be the reason that results are conflicting.
+
+## Future Directions and Lessons Learnt
+
+Cervical cancer is a disease that needs more attention as its 'fame' does not match its 'fatality'. We learned a lot from this project. Not only from the plots we made and interactive maps we generated but also about the disease itself.
+
+We have some potential candidate variables that might relate to cervical cancer. Like IUD, STD, especially HIV, condylomatosis, and vulvo-perineal condylomatosis. There are some variables that we thought would be related but actually not from our dataset, like the number of pregnancies and the number of sexual partners. This would somehow influence common beliefs on risk factors of cervical cancer.
+
+We hope cervical cancer would be studied more and risk factors to be validated to protect women from this terrible disease and help treatments on current patients suffering through this.
+
+We would like to appreciate your reading of our project. Hope you gained useful information from us.
