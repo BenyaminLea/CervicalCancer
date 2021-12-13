@@ -24,7 +24,7 @@ colnames(df) = c("Ag", "Nosp","Fsi","Nop","Sm","SmY","SmPY","HC","HCY",
 
 Many cancer diseases relate with age, that older people have higher risks. Is this consistent for cervical cancer in this data set?
 
-The chance of one's having cervical cancer does not seem to have an obvious connection to one's age from the four tests. From the graphs, the age overlapping rate is quite high between the two groups. The test results that came out with "0" have more outlines and those test results with "1" are more concentrated around the whole IQR, this might result from the fact that the 1/0 ratio in our data is very small. Since, every median line of "1" box looks close to the median line of "0" box or lie outside of the whole IQR of box "0", there is unlikely to have a difference between the age factor and cervical cancer. From the graphs, we can also observe that the median of "1" is slightly higher than "0", meaning that the median of the group was tested with cervical cancer has a slightly higher age than those who do not have the disease.
+The chance of one's having cervical cancer does not seem to have an obvious connection to one's age from the four tests. From the graphs, the age overlapping rate is quite high between the two groups. The test results that came out with "0" have more outliers and those test results with "1" are more concentrated around the whole IQR, although this might result from the fact that the 1/0 ratio in our data is very small. Since every median line of "1" box looks close to the median line of "0" box or lie outside of the whole IQR of box "0", there is unlikely to have a difference between the age factor and cervical cancer. From the graphs, we can also observe that the median of "1" is slightly higher than "0", meaning that the median of the group was tested with cervical cancer has a slightly higher age than those who do not have the disease.
 
 There are indeed differences between the four different diagnosis method and that results in the differences in the plot. The age range of patients diagnosed with cervical cancer with cytology and Hinselmann is less than that of patients without cervical cancer. However, with biopsy and Schiller, the age range between the two groups are similar. 
 
@@ -542,7 +542,7 @@ g_std_bp + g_std_ct + g_std_sch + g_std_hn +
 
 We would then look into a collection of different STDs and their correlation with cervical cancers. 
 
-Due to data scarcity, most of the specific STDs does not have sufficient cases for us to compare the results. What we have in the below plot is a bar plot on percentage comparison of patient with cervical cancer from group STD0, who are diagnosed with no the specific STD, and group STD1, who have that specific STD. We see an increase in percent of cervical caner in group STD1, which could be the evidence for the claim that condylomatosis,vulvo-perineal condylomatosis and HIV are diseases relate to cervical cancer that would bring higher risks. 
+Due to data scarcity, most of the specific STDs does not have sufficient cases for us to compare the results. What we have in the plot below is a bar plot on percentage comparison of patient with cervical cancer from group STD0, who are diagnosed with no the specific STD, and group STD1, who have that specific STD. We see an increase in percent of cervical caner in group STD1, which could be the evidence for the claim that condylomatosis,vulvo-perineal condylomatosis and HIV are diseases relate to cervical cancer that would bring higher risks. 
 
 ```{r}
 #stdcer no 1s,tdvag no 1s in bp=1,stdsyp no 1s in bp1,stdpel no 1s in bp1,stdgen no 1s in bp0,stdmol no 1s in bp1,stdaid no 1s,stdhip no 1s in bp1,stdhpv no 1s in bp1
@@ -572,7 +572,7 @@ ggplot(stdcompare, aes(STD, percentage,fill=type))+
 
 We will also check STD Number of Diagnosis, to find if it is related with cervical cancer. 
 
-In the mosaic plot below, we observe that for cervical cancer patients, about 20% of them have been diagonsed 1 times or more. And for non cervical cancer group, it has about 2% diagnosed 1 times or more. This might hint the claim that number of STD diagnosis correlates with cervical cancer in some ways.
+In the mosaic plot below, we observe that for cervical cancer patients, about 20% of them have been diagnosed 1 times or more. And for non cervical cancer group, it has about 2% diagnosed 1 time or more. This might hint the claim that number of STD diagnosis correlates with cervical cancer in some ways.
 
 ```{r, fig.height = 3, fig.width = 3, fig.align = "center"}
 df$STDND = as.integer(df$STDND)
@@ -582,9 +582,9 @@ mosaic(STDND~Bp, data = df_tmp,direction = c("v", "h"),
                                    STDND = "STD Num Diagnosis")))
 ```
 
-Since number of diagnosis of STD seems to relate to cervical cancer, we keep test on first time diagnosis (time till now) of STD, last time diagnosis (time till now) and their relation to cervical cancer.
+Since number of diagnosis of STD seems to relate to cervical cancer, we keep test on first time diagnosis (time till now) of STD, last time diagnosis (time till now) and their relations to cervical cancer.
 
-In the boxplot below, we observe that in biopsy and Hinselmann tests, group1, who are cervical cancer patients, have later first diagnosis. However, in cytology and Schiller tests, group1 have earlier first diagnosis. There are outliers in both groups with high time period value, meaning that the first diagnosis time for these patients are much earlier. So with conflicting results, we cannot decide on whether first time diagnosis of STD relates to cervical cancer.
+In the box plot below, we observe that in biopsy and Hinselmann tests, group "1", who are cervical cancer patients, has later first diagnosis. However, in cytology and Schiller tests, group "1" has earlier first diagnosis. There are outliers in both groups with high time period value, meaning that the first diagnosis time for these patients are much earlier. Given conflicting results, we cannot decide on whether first time diagnosis of STD relates to cervical cancer.
 
 ```{r}
 g_stdfd_bp = ggplot(df, aes(as.factor(Bp), as.double(STDfd))) +
@@ -640,7 +640,7 @@ g_stdfd_bp + g_stdfd_ct + g_stdfd_sch + g_stdfd_hn +
 ```
 
 
-In the boxplot below, we observe that in biopsy and Hinselmann tests, group1, who are cervical cancer patients, have more recent last diagnosis. However, in cytology and Schiller tests, group1 have less recent last diagnosis. There are outliers in both groups with high time period value, meaning that the last diagnosis time for these patients are much earlier. So with conflicting results, we cannot decide on whether last time diagnosis of STD relates to cervical cancer.
+In the box plot below, we observe that in biopsy and Hinselmann tests, group1, who are cervical cancer patients, have more recent last diagnosis. However, in cytology and Schiller tests, group "1" have less recent last diagnosis. There are outliers in both groups with high time period value, meaning that the last diagnosis time for these patients are much earlier. So with conflicting results, we cannot decide on whether last time diagnosis of STD relates to cervical cancer.
 
 ```{r}
 g_stdld_bp = ggplot(df, aes(as.factor(Bp), as.double(STDld))) +
