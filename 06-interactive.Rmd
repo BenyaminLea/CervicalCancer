@@ -1,8 +1,5 @@
 # Interactive component
 
-
-# Interactive component
-
 ## Link to the interactive map
 Click [here](https://vizhub.com/BenyaminLea/6b9ce5dd8942471d9a358dc1ae61d992?edit=files&file=index.html&mode=full) or copy the url: https://vizhub.com/BenyaminLea/6b9ce5dd8942471d9a358dc1ae61d992?edit=files&file=index.html&mode=full
 
